@@ -60,17 +60,9 @@ public class AjouterPublicationForm extends Form {
         
          
         
-      
-        this.addComponent(BorderLayout.NORTH, north);
-        
-        Container center = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-        
-        
-        
-         center.setUIID("AjoutFormCenter");
-           Button photoButton = new Button("Ajouter Button");
+        Button photoButton = new Button("Ajouter Button");
        photoButton.setUIID("AjouterButton");
-        center.addComponent(photoButton);
+        north.addComponent(photoButton);
         photoButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
@@ -105,6 +97,13 @@ public class AjouterPublicationForm extends Form {
                 
             }
             });
+        this.addComponent(BorderLayout.NORTH, north);
+        
+        Container center = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+        
+        
+        
+         center.setUIID("AjoutFormCenter");
         
         Container row1 = new Container(new GridLayout(1));
         TextField text = new TextField();
