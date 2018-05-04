@@ -120,14 +120,14 @@ public class AjouterPublicationForm extends Form {
         center.addComponent(altitude);
         altitude.setHint(" Altitude");
                  altitude.setUIID("AjoutFormField");
-
+altitude.setHidden(true);
       TextField longitude = new TextField();
         
         center.addComponent(longitude);
         longitude.setHint(" Longitude");
                          longitude.setUIID("AjoutFormField");
 
-       
+       longitude.setHidden(true);
         
         this.addComponent(BorderLayout.CENTER, center);
 //        
