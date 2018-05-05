@@ -59,6 +59,7 @@ public class ProfileGUI {
         PhoneTF.setEditable(true);
         PhoneTF.setHint(LoginGUI.connectedUser.getTelephone());
         Button BT = new Button("Modifier");
+        BT.setUIID("AjouterButton");
         BT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

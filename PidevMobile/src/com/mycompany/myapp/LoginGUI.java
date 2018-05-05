@@ -54,7 +54,7 @@ public class LoginGUI  extends Form  {
         Button BT = new Button("s'authentifier");
         //BT.setUIID("delete");
         welcome.add(EmailTF).add(PassTF).add(BT);
-
+        BT.setUIID("AjouterButton");
         BT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

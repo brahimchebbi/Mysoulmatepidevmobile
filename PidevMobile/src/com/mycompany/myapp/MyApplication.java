@@ -39,7 +39,7 @@ public class MyApplication {
 //       Ajout.show();
         LoginGUI l = new LoginGUI();
           l.LoginInterfaceShow();
-         SignupGUI S = new SignupGUI();
+//         SignupGUI S = new SignupGUI();
 //         S.SignupInterfaceShow();
        
     }

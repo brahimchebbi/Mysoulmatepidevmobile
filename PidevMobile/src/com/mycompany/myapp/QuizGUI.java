@@ -48,6 +48,8 @@ public class QuizGUI {
         Form hi = new Form("Quiz", new BorderLayout());
         Toolbar tb = hi.getToolbar();
         tb.setUIID("toolbar");
+        hi.setUIID("AjoutForm");
+       
         Tabs t = new Tabs();
         Style s = UIManager.getInstance().getComponentStyle("Tab");
         FontImage icon1 = FontImage.createMaterial(FontImage.MATERIAL_QUESTION_ANSWER, s);
@@ -73,6 +75,7 @@ public class QuizGUI {
                     if (RB1.isSelected()) {
                         ScoreVC += Q.getScoreRep1();
                     }
+                    
                 }
             });
             RB2.addActionListener(new ActionListener() {
