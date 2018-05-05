@@ -7,14 +7,12 @@ package com.mycompany.myapp;
 
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
-import com.codename1.components.RSSReader;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.NetworkManager;
 import com.codename1.messaging.Message;
 import com.codename1.notifications.LocalNotification;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
-import com.codename1.ui.Component;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
@@ -31,13 +29,14 @@ import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
-import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
 import com.codename1.util.StringUtil;
 import com.mycompagny.Service.CommentaireService;
 import com.mycompagny.Service.PublicationService;
+import com.mycompagny.Service.RdvService;
 import com.mycompany.Entite.Commentaire;
 import com.mycompany.Entite.Publication;
+import com.mycompany.Entite.rdv;
 import com.restfb.DefaultFacebookClient;
 import com.restfb.FacebookClient;
 import com.restfb.Parameter;
@@ -49,17 +48,18 @@ import java.util.List;
  *
  * @author USER
  */
-public class FilForm extends Form {
-   // final Resources res;
-    Container home;
+public class RdvForm extends Form{
+    
+    
+      Container home;
     EncodedImage enc;
     Image imgs;
     ImageViewer imgv;
     public static int modifid = -1 ;
     public static int CommPubId = -1;
-    public FilForm(Resources res) {
+    public RdvForm(Resources res) {
          
-        super("Fil Actualite");
+        super("RDV Liste");
         Toolbar tb = getToolbar();
         tb.setUIID("toolbar");
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);     
@@ -74,16 +74,16 @@ public class FilForm extends Form {
 
       
     
-         PublicationService service = new PublicationService();
-         ArrayList<Publication> lis = service.getListPub();
+         RdvService service = new RdvService();
+         ArrayList<rdv> lis = service.getListRdv();
           Container root = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-         for (Publication t : lis) {
-             Label idPub = new Label("id Pub:" + t.getId_pub());
-              String str = idPub.getText();
+         for (rdv t : lis) {
+             Label idRdv = new Label("id Pub:" + t.getIdrdv());
+              String str = idRdv.getText();
               List<String> parts = StringUtil.tokenize(str, ":");
-               final String idPublication;
-                idPublication = parts.get(1).substring(0);
-                 int ids = Integer.parseInt(idPublication);
+               final String idRendezvous;
+                idRendezvous = parts.get(1).substring(0);
+                 int ids = Integer.parseInt(idRendezvous);
             Container root2 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             Container C1 = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Label label = new Label();
@@ -91,95 +91,36 @@ public class FilForm extends Form {
             Image placeholder = Image.createImage(deviceWidth, deviceWidth); //square image set to 10% of screen width
             EncodedImage encImage = EncodedImage.createFromImage(placeholder, false);
             label.setIcon(URLImage.createToStorage(encImage,
-                    "Large_" + "http://localhost/images/products/uploads/" + t.getImage()
-                    + "", "http://localhost/images/products/uploads/" + t.getImage()
+                    "Large_" + "http://localhost/images/products/" + t.getImage_name()
+                    + "", "http://localhost/images/products/" + t.getImage_name()
                     + "", URLImage.RESIZE_SCALE_TO_FILL));
 
-            Label l = new Label(t.getText());
+            Label l = new Label(t.getNomrdv());
             Container C2 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             Label label1 = new Label(t.getAdresse());
-             
-
-            Button partage = new Button("Partager sur FB");
-            partage.setUIID("Partage");
-          
-            partage.addActionListener(new ActionListener() {
-
-                @Override
-                public void actionPerformed(ActionEvent evt) {
-                    String accessToken = "EAACEdEose0cBAO0atOpWDZCZC0dcMQUzss2nHDSRcA6idrrU1FMGHRwAcaFOZBhGSiloXSxt1jnzwZAqU9ogK2z2saQ286RoPRfHI90xQIw8c1IPmaHogaQORllQsssCsxjmCpAAQV6REFAuu1SVxDahFxC6S8uyqkJeXrgCoJbEE3PWdHTpsko2NWFblQHYWk4kiqZCrXcpZCRn2aH4eZC";
-
-                    FacebookClient fbClient = new DefaultFacebookClient(accessToken);
-                    FacebookType response = fbClient.publish("me/feed", FacebookType.class,
-                            Parameter.with("message", t.getText() + "\n" + t.getAdresse()));
-                    Dialog.show("Confirmation", "votre publication a ete partager sur facebook", "Ok", null);
-
-                }
-
-            });
-            Button del = new Button("Supprimer");
-            del.setUIID("delete");
-          
-            del.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
-
-                    Dialog d = new Dialog();
-
-                    if (Dialog.show("Confirmation", "delete this product??", "oui", "Annuler")) {
-                        ConnectionRequest req = new ConnectionRequest();
-
-                        req.setUrl("http://localhost/webservice/web/app_dev.php/Service/Publication/DeletePub/"
-                                + t.getId_pub());
-                        System.out.println(t.getId_pub());
-                        NetworkManager.getInstance().addToQueue(req);
-                        home.revalidate();
-//                       PubliciteController pc = new PubliciteController(theme);
-//                        pc.getForm().show();
-                    new FilForm(res).show();
-
-                    }
-                }
-            });
-               Button Modif = new Button("Modifier");
-            Modif.setUIID("delete");
-          
-            Modif.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
-                    
-              modifid= t.getId_pub();
-              System.out.println(modifid);
-              ModifierPublicationForm modif = new ModifierPublicationForm(res);
-              modif.show();
-                  //  System.out.println(modifid);
-
-                    }
-                
-            });
+ 
              Container root3 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             Container C3 = new Container(new BoxLayout(BoxLayout.X_AXIS));
-              TextField Comm = new TextField();
-        
-      
-        Comm.setHint("Commentez");
-         Comm.setUIID("AjoutFormField");
+                TextField Comm = new TextField();
+                Comm.setHint("Nombre De Place");
+                Comm.setUIID("AjoutFormField");
+                
          
              Container root4 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
           
             Container C4 = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Commentaire c = new Commentaire(); 
-            Label Commlab = new Label("ff");
+          
             
-       Button Comment = new Button("Commentez");
-            Comment.setUIID("delete");
+       Button reserve = new Button("Reservez");
+            reserve.setUIID("delete");
       
-           Comment.addActionListener(new ActionListener() {
+           reserve.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
                     
                     
-                           System.out.println(idPublication);
+                           System.out.println(idRendezvous);
 
                                 System.out.println("PubId:" + ids);
                               
@@ -188,21 +129,21 @@ public class FilForm extends Form {
                                 if (Dialog.show("Confirmer", "Voulez vous Ajouter ce commentaire ?", "Oui", "Non")) {
                                     pre.ajoutcomm(ids, Comm.getText());
 
-                                    Message m = new Message("Vous avez ajouter un nouveau commentaire pour la publication" + t.getText());
+                                    Message m = new Message("Vous avez reservez ce rendez-vous" + t.getNomrdv());
 
-                                      Dialog d = new Dialog("--Commentaire--");
+                                      Dialog d = new Dialog("--Rendez-vouz--");
 
-                                    TextArea popupBody = new TextArea("Votre ami est notifie ", 4, 12);
+                                    TextArea popupBody = new TextArea("l'adminstrateur  est notifie ", 4, 12);
 
                                     popupBody.setUIID("PopupBody");
                                     popupBody.setEditable(false);
                                     d.setLayout(new BorderLayout());
                                     d.add(BorderLayout.CENTER, popupBody);
 
-                                    d.showPopupDialog(Comment);
+                                    d.showPopupDialog(reserve);
                                     LocalNotification n = new LocalNotification();
                                     n.setId("AFK-notifications");
-                                    n.setAlertBody("Vous avez ajouter un commentaire!");
+                                    n.setAlertBody("Vous avez une reservation!");
                                     n.setAlertTitle("AFK Comment System!");
                                     Display.getInstance().scheduleLocalNotification(
                                             n,
@@ -232,7 +173,7 @@ public class FilForm extends Form {
             C1.add(l);
             C2.add(label1);
             C3.add(Comm);
-           C4.add(Commlab);
+           
           
             root2.add(C1);
             root2.add(C2);
@@ -242,11 +183,9 @@ public class FilForm extends Form {
             
             Container btn = new Container(new BoxLayout(BoxLayout.X_AXIS));
 
-            btn.add(partage);
-            btn.add(del);
-            btn.add(Modif);
+            
           Container btn1 = new Container(new BoxLayout(BoxLayout.X_AXIS));
-          btn1.add(Comment);
+          btn1.add(reserve);
             root2.add(btn);
             root3.add(btn1);
             root.add(root2);
@@ -281,8 +220,7 @@ public class FilForm extends Form {
             
         });
         
-        
-         this.setBackCommand(new Command("Rendez-vous Liste") {
+       this.setBackCommand(new Command("Rendez-vous Liste") {
 
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -292,7 +230,6 @@ public class FilForm extends Form {
             
         });
         
-    }
     
-    
+}
 }

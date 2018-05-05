@@ -249,5 +249,15 @@ AjouterB.setUIID("AjouterButton");
         });
           
         
+         this.setBackCommand(new Command("Rendez-vous Liste") {
+
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                RdvForm RDV =new RdvForm(res);
+                RDV.show();
+            }
+            
+        });
+        
     }
 }

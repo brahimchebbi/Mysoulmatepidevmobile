@@ -50,7 +50,7 @@ public class RdvService {
                         rdv E = new rdv();
                           float id = Float.parseFloat(obj.get("id").toString());
                           float nbrplacedis = Float.parseFloat(obj.get("nbrplacedispo").toString());
-                           float pr = Float.parseFloat(obj.get("prix").toString());
+                      //     float pr = Float.parseFloat(obj.get("prix").toString());
                            
                         E.setIdrdv((int) id);
 
@@ -59,7 +59,7 @@ public class RdvService {
                          E.setAdresse(obj.get("adresse").toString()); 
                          E.setImage_name(obj.get("nomImage").toString()); 
                          E.setNbrplacedispo((int)nbrplacedis);
-                         E.setPrix((int)pr);
+                      //   E.setPrix((float)pr);
                         System.out.println(E);
                        listrdv.add(E);
 
