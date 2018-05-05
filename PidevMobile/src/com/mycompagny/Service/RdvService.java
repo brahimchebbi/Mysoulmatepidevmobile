@@ -11,10 +11,14 @@ import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
+import com.mycompany.Entite.Commentaire;
 import com.mycompany.Entite.Publication;
 import com.mycompany.Entite.rdv;
+import com.mycompany.myapp.FilForm;
+import com.mycompany.myapp.RdvForm;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -73,6 +77,20 @@ public class RdvService {
         NetworkManager.getInstance().addToQueueAndWait(con);
         return listrdv;
     }
-     
+         public void ajoutres(int ids,Date dat,int nbplace ) {
+        ConnectionRequest con = new ConnectionRequest();
+        String Url = "http://localhost/webservice/web/app_dev.php/Service/Publication/CommentAdd/"+ids+"/"+dat+"/"+nbplace;
+        con.setUrl(Url);
+
+        System.out.println("comment done");
+
+        con.addResponseListener((e) -> {
+            String str = new String(con.getResponseData());
+            System.out.println(str);
+
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+    }
+    
     
 }

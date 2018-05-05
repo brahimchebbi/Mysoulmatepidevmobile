@@ -7,8 +7,9 @@ package com.mycompany.myapp;
 
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.ImageViewer;
-import com.codename1.io.ConnectionRequest;
-import com.codename1.io.NetworkManager;
+import com.codename1.l10n.DateFormat;
+import com.codename1.l10n.ParseException;
+import com.codename1.l10n.SimpleDateFormat;
 import com.codename1.messaging.Message;
 import com.codename1.notifications.LocalNotification;
 import com.codename1.ui.Button;
@@ -29,19 +30,14 @@ import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.spinner.DateSpinner;
 import com.codename1.ui.util.Resources;
 import com.codename1.util.StringUtil;
-import com.mycompagny.Service.CommentaireService;
-import com.mycompagny.Service.PublicationService;
 import com.mycompagny.Service.RdvService;
 import com.mycompany.Entite.Commentaire;
-import com.mycompany.Entite.Publication;
 import com.mycompany.Entite.rdv;
-import com.restfb.DefaultFacebookClient;
-import com.restfb.FacebookClient;
-import com.restfb.Parameter;
-import com.restfb.types.FacebookType;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -56,7 +52,7 @@ public class RdvForm extends Form{
     Image imgs;
     ImageViewer imgv;
     public static int modifid = -1 ;
-    public static int CommPubId = -1;
+    public static int RdvId = -1;
     public RdvForm(Resources res) {
          
         super("RDV Liste");
@@ -78,7 +74,7 @@ public class RdvForm extends Form{
          ArrayList<rdv> lis = service.getListRdv();
           Container root = new Container(new BoxLayout(BoxLayout.Y_AXIS));
          for (rdv t : lis) {
-             Label idRdv = new Label("id Pub:" + t.getIdrdv());
+             Label idRdv = new Label("id RDV:" + t.getIdrdv());
               String str = idRdv.getText();
               List<String> parts = StringUtil.tokenize(str, ":");
                final String idRendezvous;
@@ -101,11 +97,14 @@ public class RdvForm extends Form{
  
              Container root3 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             Container C3 = new Container(new BoxLayout(BoxLayout.X_AXIS));
-                TextField Comm = new TextField();
-                Comm.setHint("Nombre De Place");
-                Comm.setUIID("AjoutFormField");
-                
-         
+                TextField nbp = new TextField();
+                nbp.setHint("Nombre De Place");
+                nbp.setUIID("AjoutFormField");
+                Container C5 = new Container(new BoxLayout(BoxLayout.X_AXIS));
+                DateSpinner datedeb=new DateSpinner();
+               
+                         datedeb.setUIID("AjoutFormField");
+
              Container root4 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
           
             Container C4 = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -118,16 +117,30 @@ public class RdvForm extends Form{
            reserve.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    
-                    
+                     int day = datedeb.getCurrentDay();
+                int month =datedeb.getCurrentMonth();
+                int year = datedeb.getCurrentYear();
+                Date date = null;
+                
+                    System.out.println(day + " "+ month + " "+ year);
+                    String datestring = year+"-"+month+"-"+day;
+                    System.out.println(datestring);
+                    DateFormat Format = new SimpleDateFormat("yyyy-MMMM-dd");
+                    try {
+                         date = Format.parse(datestring);
+                         System.out.println("datedate"+date);
+                    } catch (ParseException ex) {
+                        
+                    }
                            System.out.println(idRendezvous);
 
                                 System.out.println("PubId:" + ids);
                               
-                                CommentaireService pre = new CommentaireService();
+                                RdvService pre = new RdvService();
 
                                 if (Dialog.show("Confirmer", "Voulez vous Ajouter ce commentaire ?", "Oui", "Non")) {
-                                    pre.ajoutcomm(ids, Comm.getText());
+                                    int nombre = Integer.parseInt(nbp.getText());
+                                    pre.ajoutres(ids,date, nombre);
 
                                     Message m = new Message("Vous avez reservez ce rendez-vous" + t.getNomrdv());
 
@@ -152,34 +165,28 @@ public class RdvForm extends Form{
                                     );
 
                                 }
-//                    CommPubId= t.getId_pub();
-//                     CommentaireService ser = new CommentaireService();
-//            Commentaire comment = new Commentaire();
-//            comment.setIdPub(CommPubId);
-//            comment.setCommentaire(Comm.getText());
-//                               System.out.println(CommPubId);
-//
-//            ser.ajoutComm(comment);
+                 
              FilForm fil = new FilForm(res);
              fil.show();
-                  //  System.out.println(comment.getIdPub()+""+comment.getCommentaire());
+                  
                     
                 }
             });
        
-       
+             
         
             C1.add(label);
             C1.add(l);
             C2.add(label1);
-            C3.add(Comm);
+            C3.add(nbp);
+            C5.add(datedeb);
            
           
             root2.add(C1);
             root2.add(C2);
             root3.add(C3);
             root3.add(C4);
-          
+          root3.add(C5);
             
             Container btn = new Container(new BoxLayout(BoxLayout.X_AXIS));
 
