@@ -218,8 +218,8 @@ public class FilForm extends Form {
 //                               System.out.println(CommPubId);
 //
 //            ser.ajoutComm(comment);
-//             FilForm fil = new FilForm(res);
-//             fil.show();
+             FilForm fil = new FilForm(res);
+             fil.show();
                   //  System.out.println(comment.getIdPub()+""+comment.getCommentaire());
                     
                 }
