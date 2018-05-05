@@ -18,7 +18,7 @@ public class CommentaireService {
     
     public void ajoutComm(Commentaire ta) {
         ConnectionRequest con = new ConnectionRequest();
-        String Url = "http://localhost/webservice/web/app_dev.php/Service/Publication/Commentt?id="+FilForm.CommPubId+"&comment="+ta.getCommentaire();
+        String Url = "http://localhost/webservice/web/app_dev.php/Service/Publication/Commentt?idpub="+FilForm.CommPubId+"&comment="+ta.getCommentaire();
         con.setUrl(Url);
 
         System.out.println("tt");

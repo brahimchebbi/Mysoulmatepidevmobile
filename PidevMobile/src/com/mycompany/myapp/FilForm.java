@@ -170,12 +170,12 @@ public class FilForm extends Form {
             Commentaire comment = new Commentaire();
             comment.setIdPub(CommPubId);
             comment.setCommentaire(Comm.getText());
-           
+                               System.out.println(CommPubId);
+
             ser.ajoutComm(comment);
-           
              FilForm fil = new FilForm(res);
              fil.show();
-                    System.out.println(comment.getIdPub()+""+comment.getCommentaire());
+                  //  System.out.println(comment.getIdPub()+""+comment.getCommentaire());
                     
                 }
             });
