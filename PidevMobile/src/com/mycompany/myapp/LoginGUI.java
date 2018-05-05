@@ -95,8 +95,10 @@ public class LoginGUI  extends Form  {
                         connectedUser = Q;
                         if (connectedUser.getVerifié().equals("true")) {
                             Resources theme = UIManager.initFirstTheme("/theme");
-                            FilForm Fil = new FilForm(theme);
-                            Fil.show();
+//                            FilForm Fil = new FilForm(theme);
+//                            Fil.show();
+                              ProfileGUI p = new ProfileGUI();
+                              p.ShowProfil();
                         } else if (connectedUser.getVerifié().equals("false")) {
                             QuizGUI QGUI = new QuizGUI();
                             QGUI.AfficherQuiz();
