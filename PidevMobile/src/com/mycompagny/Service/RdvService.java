@@ -79,7 +79,7 @@ public class RdvService {
     }
          public void ajoutres(int ids,Date dat,int nbplace ) {
         ConnectionRequest con = new ConnectionRequest();
-        String Url = "http://localhost/webservice/web/app_dev.php/Service/Publication/CommentAdd/"+ids+"/"+dat+"/"+nbplace;
+        String Url = "http://localhost/webservice/web/app_dev.php/Service/Publication/AjoutRES/"+ids+"/"+dat+"/"+nbplace;
         con.setUrl(Url);
 
         System.out.println("comment done");

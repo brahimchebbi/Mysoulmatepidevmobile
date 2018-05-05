@@ -123,9 +123,9 @@ public class RdvForm extends Form{
                 Date date = null;
                 
                     System.out.println(day + " "+ month + " "+ year);
-                    String datestring = year+"-"+month+"-"+day;
+                    String datestring = year+"/"+month+"/"+day;
                     System.out.println(datestring);
-                    DateFormat Format = new SimpleDateFormat("yyyy-MMMM-dd");
+                    DateFormat Format = new SimpleDateFormat("yyyy/MM/dd");
                     try {
                          date = Format.parse(datestring);
                          System.out.println("datedate"+date);
