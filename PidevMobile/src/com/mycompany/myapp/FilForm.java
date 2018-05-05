@@ -78,12 +78,12 @@ public class FilForm extends Form {
          ArrayList<Publication> lis = serviceTask.getListPub();
           Container root = new Container(new BoxLayout(BoxLayout.Y_AXIS));
          for (Publication t : lis) {
-             Label idsta = new Label("id stage:" + t.getId_pub());
-              String str = idsta.getText();
+             Label idPub = new Label("id Pub:" + t.getId_pub());
+              String str = idPub.getText();
               List<String> parts = StringUtil.tokenize(str, ":");
-               final String idstage;
-                idstage = parts.get(1).substring(0);
-                 int ids = Integer.parseInt(idstage);
+               final String idPublication;
+                idPublication = parts.get(1).substring(0);
+                 int ids = Integer.parseInt(idPublication);
             Container root2 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             Container C1 = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Label label = new Label();
@@ -178,10 +178,10 @@ public class FilForm extends Form {
                 public void actionPerformed(ActionEvent evt) {
                     
                     
-                           System.out.println(idstage);
+                           System.out.println(idPublication);
 
                                 System.out.println("PubId:" + ids);
-                               // System.out.println("bbb:" + ide);
+                              
                                 CommentaireService pre = new CommentaireService();
 
                                 if (Dialog.show("Confirmer", "Voulez vous Ajouter ce commentaire ?", "Oui", "Non")) {
