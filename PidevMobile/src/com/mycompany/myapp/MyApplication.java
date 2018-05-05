@@ -37,10 +37,10 @@ public class MyApplication {
         }
 //       AjouterPublicationForm Ajout = new AjouterPublicationForm(theme);
 //       Ajout.show();
-// FilForm Fil = new FilForm(theme);
-//       Fil.show();
         LoginGUI l = new LoginGUI();
           l.LoginInterfaceShow();
+//         SignupGUI S = new SignupGUI();
+//         S.SignupInterfaceShow();
     }
 
     public void stop() {

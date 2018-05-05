@@ -12,11 +12,9 @@ import com.codename1.io.NetworkEvent;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.events.ActionListener;
 import com.mycompany.Entite.Publication;
+import com.mycompany.myapp.LoginGUI;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +26,7 @@ import java.util.Map;
 public class PublicationService {
      public void ajoutPub(Publication ta) {
         ConnectionRequest con = new ConnectionRequest();
-        String Url = "http://localhost/symfonypidev/web/app_dev.php/API/Publication/AjouterPub?adresse="+ta.getAdresse()+"&text="+ta.getText()+"&imageName="+ta.getImage() ;
+        String Url = "http://localhost/symfonypidev/web/app_dev.php/API/Publication/AjouterPub?id="+LoginGUI.connectedUser.getID()+"&adresse="+ta.getAdresse()+"&text="+ta.getText()+"&imageName="+ta.getImage() ;
         con.setUrl(Url);
 
         System.out.println("tt");

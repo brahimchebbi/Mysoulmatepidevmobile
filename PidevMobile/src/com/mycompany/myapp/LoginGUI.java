@@ -11,12 +11,15 @@ import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.plaf.UIManager;
+import com.codename1.ui.util.Resources;
 import com.mycompany.Entite.Client;
 import java.io.IOException;
 import java.util.Map;
@@ -25,14 +28,21 @@ import java.util.Map;
  *
  * @author CorpseRoot
  */
-public class LoginGUI {
+public class LoginGUI  extends Form  {
 
     public static Client connectedUser;
 
     public void LoginInterfaceShow() {
         Form F = new Form("Sign up");
+        F.setUIID("AjoutForm");
         Toolbar tb = F.getToolbar();
         tb.setUIID("toolbar");
+        Container topBar = new Container();
+        topBar.setUIID("SideCommand");
+        tb.addComponentToSideMenu(topBar);
+        tb.addMaterialCommandToSideMenu("Register", FontImage.MATERIAL_ADD_BOX, e -> { SignupGUI S = new SignupGUI(); S.SignupInterfaceShow(); });
+        tb.addMaterialCommandToSideMenu("Login", FontImage.MATERIAL_WEB, e -> { LoginGUI L = new LoginGUI(); L.LoginInterfaceShow(); });
+        
         Container welcome = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         TextField EmailTF = new TextField();
         EmailTF.setHint("Email");
@@ -84,8 +94,9 @@ public class LoginGUI {
 
                         connectedUser = Q;
                         if (connectedUser.getVerifié().equals("true")) {
-                            MatchingGUI m = new MatchingGUI();
-                            m.AfficherMatchingMenu();
+                            Resources theme = UIManager.initFirstTheme("/theme");
+                            FilForm Fil = new FilForm(theme);
+                            Fil.show();
                         } else if (connectedUser.getVerifié().equals("false")) {
                             QuizGUI QGUI = new QuizGUI();
                             QGUI.AfficherQuiz();

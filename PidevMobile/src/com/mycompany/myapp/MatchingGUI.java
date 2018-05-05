@@ -12,12 +12,15 @@ import com.codename1.io.NetworkManager;
 import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Container;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
+import com.codename1.ui.layouts.BoxLayout;
 import com.mycompany.Entite.Client;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -28,14 +31,29 @@ import java.util.Map;
  *
  * @author CorpseRoot
  */
-public class MatchingGUI {
+public class MatchingGUI extends Form {
 
-    
-     public static ArrayList<Client> ListClients = new ArrayList<>();
-    
+    public static ArrayList<Client> ListClients = new ArrayList<>();
+
     public void AfficherMatchingMenu() {
         Form h = new Form("Find Your Match!!", new BorderLayout());
-        Container hi = new Container();
+        h.setUIID("AjoutForm");
+        Toolbar tb = h.getToolbar();
+        tb.setUIID("toolbar");
+        Container topBar = new Container();
+       // topBar.add(BorderLayout.SOUTH, new Label("Cool App Tagline...", "SidemenuTagline"));
+        topBar.setUIID("SideCommand");
+        tb.addComponentToSideMenu(topBar);
+
+        tb.addMaterialCommandToSideMenu("Home", FontImage.MATERIAL_HOME, e -> {
+        });
+        tb.addMaterialCommandToSideMenu("Website", FontImage.MATERIAL_WEB, e -> { 
+        });
+        tb.addMaterialCommandToSideMenu("Settings", FontImage.MATERIAL_SETTINGS, e -> {
+        });
+        tb.addMaterialCommandToSideMenu("About", FontImage.MATERIAL_INFO, e -> {
+        });
+        Container hi = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         hi.addComponent(new Label("Sexe"));
         ComboBox SexCB = new ComboBox();
         SexCB.addItem("Homme");
@@ -54,18 +72,21 @@ public class MatchingGUI {
             @Override
             public void actionPerformed(ActionEvent evt) {
                 System.out.println(SexCB.getCurrentSelected() + FromTF.getText() + ToTF.getText());
-               
+
                 ConnectionRequest con = new ConnectionRequest();
-                String sexSelected=null;
-                switch (SexCB.getCurrentSelected())
-                {
-                    case 0: sexSelected = "homme"; break;
-                    case 1: sexSelected = "femme"; break;
+                String sexSelected = null;
+                switch (SexCB.getCurrentSelected()) {
+                    case 0:
+                        sexSelected = "homme";
+                        break;
+                    case 1:
+                        sexSelected = "femme";
+                        break;
                 }
-                String Url = "http://localhost/symfonypidev/web/app_dev.php/API/matches/find?id="+LoginGUI.connectedUser.getID()+"&sexe=" + sexSelected + "&from=" + FromTF.getText() + "&to=" + ToTF.getText();
+                String Url = "http://localhost/symfonypidev/web/app_dev.php/API/matches/find?id=" + LoginGUI.connectedUser.getID() + "&sexe=" + sexSelected + "&from=" + FromTF.getText() + "&to=" + ToTF.getText();
                 con.setUrl(Url);
-                System.out.println("test 1"); 
-               con.addResponseListener((e) -> {
+                System.out.println("test 1");
+                con.addResponseListener((e) -> {
                     try {
                         JSONParser jsonp = new JSONParser();
 
@@ -102,18 +123,18 @@ public class MatchingGUI {
 
                         }
                     } catch (IOException ex) {
-          
+
                     }
                 });
                 NetworkManager.getInstance().addToQueueAndWait(con);
-                
+
                 MatchesGUI mg = new MatchesGUI();
                 mg.ShowMatches();
             }
 
         });
         hi.addComponent(BT);
-        h.add(BorderLayout.NORTH,hi);
+        h.add(BorderLayout.NORTH, hi);
         h.show();
 
     }

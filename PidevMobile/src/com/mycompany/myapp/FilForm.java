@@ -217,6 +217,16 @@ public class FilForm extends Form {
             
         });
         
+         this.setBackCommand(new Command("Matching") {
+
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+               MatchingGUI M = new MatchingGUI();
+               M.AfficherMatchingMenu();
+            }
+            
+        });
+        
     }
     
     

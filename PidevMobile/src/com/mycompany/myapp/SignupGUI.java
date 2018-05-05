@@ -11,9 +11,11 @@ import com.codename1.ui.Button;
 import com.codename1.ui.ComboBox;
 import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.TextField;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
@@ -22,10 +24,22 @@ import com.codename1.ui.layouts.BoxLayout;
  *
  * @author CorpseRoot
  */
-public class SignupGUI {
+public class SignupGUI extends Form {
 
     public void SignupInterfaceShow() {
         Form F = new Form("Sign up", new BoxLayout(BoxLayout.Y_AXIS));
+        F.setUIID("AjoutForm");
+        Toolbar tb = new Toolbar();
+        tb = F.getToolbar();
+        tb.setUIID("toolbar");
+        Container topBar = new Container();
+        topBar.setUIID("SideCommand");
+        tb.addComponentToSideMenu(topBar);
+
+        tb.addMaterialCommandToSideMenu("Register", FontImage.MATERIAL_ADD_BOX, e -> { SignupGUI S = new SignupGUI(); S.SignupInterfaceShow();
+        });
+        tb.addMaterialCommandToSideMenu("Login", FontImage.MATERIAL_WEB, e -> { LoginGUI L = new LoginGUI(); L.LoginInterfaceShow();
+        });
         Container C = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         C.setUIID("Form");
         TextField NomTF = new TextField();

@@ -48,7 +48,7 @@ import java.util.ArrayList;
  *
  * @author CorpseRoot
  */
-public class MatchesGUI {
+public class MatchesGUI  extends Form  {
 
     Container home;
     EncodedImage enc;
@@ -57,8 +57,23 @@ public class MatchesGUI {
 
     public void ShowMatches() {
         Form f = new Form("Start talking now!!", new BoxLayout(BoxLayout.Y_AXIS));
+        f.setUIID("AjoutForm");
+        Toolbar tb = f.getToolbar();
+        tb.setUIID("toolbar");
+        tb.addCommandToRightBar("Back", null, (ev)->{ MatchingGUI M = new MatchingGUI(); M.AfficherMatchingMenu(); });
+        Container topBar = new Container();
+       // topBar.add(BorderLayout.SOUTH, new Label("Cool App Tagline...", "SidemenuTagline"));
+        topBar.setUIID("SideCommand");
+        tb.addComponentToSideMenu(topBar);
 
-        // special case for rotation
+        tb.addMaterialCommandToSideMenu("Home", FontImage.MATERIAL_HOME, e -> {
+        });
+        tb.addMaterialCommandToSideMenu("Website", FontImage.MATERIAL_WEB, e -> { 
+        });
+        tb.addMaterialCommandToSideMenu("Settings", FontImage.MATERIAL_SETTINGS, e -> {
+        });
+        tb.addMaterialCommandToSideMenu("About", FontImage.MATERIAL_INFO, e -> {
+        });
         
         Container root = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         for (Client t : MatchingGUI.ListClients) {
