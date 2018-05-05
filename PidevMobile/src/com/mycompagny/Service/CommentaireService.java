@@ -78,17 +78,7 @@ public class CommentaireService {
                                               
                         Com.setId((int) id);
                         Com.setCommentaire(obj.get("commentaire").toString());
-                        
-                        
-                        
-                        
-                        
-                       
-                   
-                        
-                        
-                        
-                       
+
                         listTach.add(Com);
 
                     }
