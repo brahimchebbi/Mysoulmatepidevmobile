@@ -15,6 +15,7 @@ import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.Tabs;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BorderLayout;
@@ -45,8 +46,8 @@ public class QuizGUI {
 
     public void AfficherQuiz() {
         Form hi = new Form("Quiz", new BorderLayout());
-        hi.setUIID("formbackground");
-
+        Toolbar tb = hi.getToolbar();
+        tb.setUIID("toolbar");
         Tabs t = new Tabs();
         Style s = UIManager.getInstance().getComponentStyle("Tab");
         FontImage icon1 = FontImage.createMaterial(FontImage.MATERIAL_QUESTION_ANSWER, s);

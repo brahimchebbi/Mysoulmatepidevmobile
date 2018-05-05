@@ -13,6 +13,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.Form;
 import com.codename1.ui.TextField;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
@@ -30,13 +31,18 @@ public class LoginGUI {
 
     public void LoginInterfaceShow() {
         Form F = new Form("Sign up");
+        Toolbar tb = F.getToolbar();
+        tb.setUIID("toolbar");
         Container welcome = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         TextField EmailTF = new TextField();
         EmailTF.setHint("Email");
+        EmailTF.setUIID("AjoutFormField");
         TextField PassTF = new TextField();
         PassTF.setConstraint(TextField.PASSWORD);
         PassTF.setHint("Mot de passe");
+        PassTF.setUIID("AjoutFormField");
         Button BT = new Button("s'authentifier");
+        //BT.setUIID("delete");
         welcome.add(EmailTF).add(PassTF).add(BT);
 
         BT.addActionListener(new ActionListener() {
