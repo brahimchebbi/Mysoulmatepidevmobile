@@ -136,7 +136,7 @@ ModifB.setUIID("AjouterButton");
             public void actionPerformed(ActionEvent evt) {
                 
                 ConnectionRequest con = new ConnectionRequest();
-                String Url = "http://localhost/webservice/web/app_dev.php/Service/Publication/GetPubId?id="+FilForm.modifid+"&text="+text.getText()+"&adresse="+adresse.getText();
+                String Url = "http://localhost/symfonypidev/web/app_dev.php/API/Publication/GetPubId?id="+FilForm.modifid+"&text="+text.getText()+"&adresse="+adresse.getText();
                 con.setUrl(Url);
                 con.addResponseListener((e) -> {
                     String str = new String(con.getResponseData());

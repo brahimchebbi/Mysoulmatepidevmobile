@@ -28,7 +28,7 @@ import java.util.Map;
 public class PublicationService {
      public void ajoutPub(Publication ta) {
         ConnectionRequest con = new ConnectionRequest();
-        String Url = "http://localhost/webservice/web/app_dev.php/Service/Publication/AjouterPub?adresse="+ta.getAdresse()+"&text="+ta.getText()+"&imageName="+ta.getImage() ;
+        String Url = "http://localhost/symfonypidev/web/app_dev.php/API/Publication/AjouterPub?adresse="+ta.getAdresse()+"&text="+ta.getText()+"&imageName="+ta.getImage() ;
         con.setUrl(Url);
 
         System.out.println("tt");
@@ -43,7 +43,7 @@ public class PublicationService {
      public ArrayList<Publication> getListPub() {
         ArrayList<Publication> listpub = new ArrayList<>();
         ConnectionRequest con = new ConnectionRequest();
-        con.setUrl("http://localhost/webservice/web/app_dev.php/Service/Publication/Showpub");
+        con.setUrl("http://localhost/symfonypidev/web/app_dev.php/API/Publication/Showpub");
         con.addResponseListener(new ActionListener<NetworkEvent>() 
         {
             @Override

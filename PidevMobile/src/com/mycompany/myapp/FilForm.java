@@ -116,7 +116,7 @@ public class FilForm extends Form {
                     if (Dialog.show("Confirmation", "delete this product??", "oui", "Annuler")) {
                         ConnectionRequest req = new ConnectionRequest();
 
-                        req.setUrl("http://localhost/webservice/web/app_dev.php/Service/Publication/DeletePub/"
+                        req.setUrl("http://localhost/symfonypidev/web/app_dev.php/API/Publication/DeletePub/"
                                 + t.getId_pub());
                         System.out.println(t.getId_pub());
                         NetworkManager.getInstance().addToQueue(req);
