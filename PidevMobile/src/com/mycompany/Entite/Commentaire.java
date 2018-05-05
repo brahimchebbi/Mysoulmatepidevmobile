@@ -90,8 +90,10 @@ public class Commentaire {
 
     @Override
     public String toString() {
-        return "Commentaire{" + "id=" + id + ", commentaire=" + commentaire + ", idUser=" + idUser + ", idPub=" + idPub + '}';
+        return "Commentaire{" + "id=" + id + ", commentaire=" + commentaire + '}';
     }
+
+    
     
     
     

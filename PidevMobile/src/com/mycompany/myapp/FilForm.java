@@ -58,6 +58,7 @@ public class FilForm extends Form {
     public static int modifid = -1 ;
     public static int CommPubId = -1;
     public FilForm(Resources res) {
+        
          
         super("Fil Actualite");
         Toolbar tb = getToolbar();
@@ -74,8 +75,8 @@ public class FilForm extends Form {
 
       
     
-         PublicationService serviceTask = new PublicationService();
-         ArrayList<Publication> lis = serviceTask.getListPub();
+         PublicationService service = new PublicationService();
+         ArrayList<Publication> lis = service.getListPub();
           Container root = new Container(new BoxLayout(BoxLayout.Y_AXIS));
          for (Publication t : lis) {
              Label idPub = new Label("id Pub:" + t.getId_pub());
@@ -166,9 +167,19 @@ public class FilForm extends Form {
          Comm.setUIID("AjoutFormField");
          
              Container root4 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+             CommentaireService CommService = new CommentaireService();
+              ArrayList<Commentaire> list = CommService.getListComm(ids);
+       
             Container C4 = new Container(new BoxLayout(BoxLayout.X_AXIS));
-            Commentaire c = new Commentaire(); 
-            Label lab = new Label(c.getCommentaire());
+             for (Commentaire cc : list) {
+            Label idC = new Label("id Commentaire:" + cc.getId());
+                String strr = idC.getText();
+
+                                List<String> part = StringUtil.tokenize(strr, ":");
+                                final String idstaache;
+                                idstaache = part.get(1).substring(0);
+                                int idt = Integer.parseInt(idstaache);
+            Label Commlab = new Label("Nom Tache :" + cc.getCommentaire());
         
        Button Comment = new Button("Commentez");
             Comment.setUIID("delete");
@@ -224,15 +235,13 @@ public class FilForm extends Form {
                     
                 }
             });
-       
+               
        
         
-            C1.add(label);
-            C1.add(l);
-            C2.add(label1);
+           
             C3.add(Comm);
-           C4.add(lab);
-          
+           C4.add(Commlab);
+               
             root2.add(C1);
             root2.add(C2);
             root3.add(C3);
@@ -253,6 +262,7 @@ public class FilForm extends Form {
            
 
         }
+               
          home.add(root);
             add(home);
         
@@ -282,5 +292,5 @@ public class FilForm extends Form {
         
     }
     
-    
+    }
 }
