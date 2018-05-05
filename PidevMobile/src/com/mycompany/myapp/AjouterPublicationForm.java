@@ -9,6 +9,7 @@ import com.codename1.components.FloatingActionButton;
 import com.codename1.components.InteractionDialog;
 import com.codename1.components.ToastBar;
 import com.codename1.maps.Coord;
+import com.codename1.notifications.LocalNotification;
  import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Component;
@@ -58,9 +59,8 @@ public class AjouterPublicationForm extends Form {
         setLayout(new BorderLayout());
         Container north = new Container(new FlowLayout(Component.CENTER));
         
-         
-        
-        Button photoButton = new Button("Ajouter Button");
+      
+        Button photoButton = new Button("Ajouter Photo");
        photoButton.setUIID("AjouterButton");
         north.addComponent(photoButton);
         photoButton.addActionListener(new ActionListener() {

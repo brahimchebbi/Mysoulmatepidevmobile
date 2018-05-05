@@ -30,6 +30,7 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.mycompagny.Service.CommentaireService;
 import com.mycompagny.Service.PublicationService;
 import com.mycompany.Entite.Commentaire;
 import com.mycompany.Entite.Publication;
@@ -50,6 +51,7 @@ public class FilForm extends Form {
     Image imgs;
     ImageViewer imgv;
     public static int modifid = -1 ;
+    public static int CommPubId = -1;
     public FilForm(Resources res) {
          
         super("Fil Actualite");
@@ -160,7 +162,23 @@ public class FilForm extends Form {
        Button Comment = new Button("Commentez");
             Comment.setUIID("delete");
       
+           Comment.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    CommPubId= t.getId_pub();
+                     CommentaireService ser = new CommentaireService();
+            Commentaire comment = new Commentaire();
+            comment.setIdPub(CommPubId);
+            comment.setCommentaire(Comm.getText());
            
+            ser.ajoutComm(comment);
+           
+             FilForm fil = new FilForm(res);
+             fil.show();
+                    System.out.println(comment.getIdPub()+""+comment.getCommentaire());
+                    
+                }
+            });
        
        
         
