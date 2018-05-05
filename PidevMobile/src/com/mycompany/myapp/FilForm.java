@@ -10,6 +10,8 @@ import com.codename1.components.ImageViewer;
 import com.codename1.components.RSSReader;
 import com.codename1.io.ConnectionRequest;
 import com.codename1.io.NetworkManager;
+import com.codename1.messaging.Message;
+import com.codename1.notifications.LocalNotification;
 import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Component;
@@ -21,6 +23,7 @@ import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.TextArea;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
@@ -30,6 +33,7 @@ import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.util.Resources;
+import com.codename1.util.StringUtil;
 import com.mycompagny.Service.CommentaireService;
 import com.mycompagny.Service.PublicationService;
 import com.mycompany.Entite.Commentaire;
@@ -39,6 +43,7 @@ import com.restfb.FacebookClient;
 import com.restfb.Parameter;
 import com.restfb.types.FacebookType;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -73,6 +78,12 @@ public class FilForm extends Form {
          ArrayList<Publication> lis = serviceTask.getListPub();
           Container root = new Container(new BoxLayout(BoxLayout.Y_AXIS));
          for (Publication t : lis) {
+             Label idsta = new Label("id stage:" + t.getId_pub());
+              String str = idsta.getText();
+              List<String> parts = StringUtil.tokenize(str, ":");
+               final String idstage;
+                idstage = parts.get(1).substring(0);
+                 int ids = Integer.parseInt(idstage);
             Container root2 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
             Container C1 = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Label label = new Label();
@@ -165,16 +176,50 @@ public class FilForm extends Form {
            Comment.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    CommPubId= t.getId_pub();
-                     CommentaireService ser = new CommentaireService();
-            Commentaire comment = new Commentaire();
-            comment.setIdPub(CommPubId);
-            comment.setCommentaire(Comm.getText());
-                               System.out.println(CommPubId);
+                    
+                    
+                           System.out.println(idstage);
 
-            ser.ajoutComm(comment);
-             FilForm fil = new FilForm(res);
-             fil.show();
+                                System.out.println("PubId:" + ids);
+                               // System.out.println("bbb:" + ide);
+                                CommentaireService pre = new CommentaireService();
+
+                                if (Dialog.show("Confirmer", "Voulez vous Ajouter ce commentaire ?", "Oui", "Non")) {
+                                    pre.ajoutcomm(ids, Comm.getText());
+
+                                    Message m = new Message("Vous avez ajouter un nouveau commentaire pour la publication" + t.getText());
+
+                                      Dialog d = new Dialog("--Commentaire--");
+
+                                    TextArea popupBody = new TextArea("Votre ami est notifie ", 4, 12);
+
+                                    popupBody.setUIID("PopupBody");
+                                    popupBody.setEditable(false);
+                                    d.setLayout(new BorderLayout());
+                                    d.add(BorderLayout.CENTER, popupBody);
+
+                                    d.showPopupDialog(Comment);
+                                    LocalNotification n = new LocalNotification();
+                                    n.setId("AFK-notifications");
+                                    n.setAlertBody("Vous avez ajouter un commentaire!");
+                                    n.setAlertTitle("AFK Comment System!");
+                                    Display.getInstance().scheduleLocalNotification(
+                                            n,
+                                            System.currentTimeMillis() + 10, // fire date/time
+                                            LocalNotification.REPEAT_NONE // Whether to repeat and what frequency
+                                    );
+
+                                }
+//                    CommPubId= t.getId_pub();
+//                     CommentaireService ser = new CommentaireService();
+//            Commentaire comment = new Commentaire();
+//            comment.setIdPub(CommPubId);
+//            comment.setCommentaire(Comm.getText());
+//                               System.out.println(CommPubId);
+//
+//            ser.ajoutComm(comment);
+//             FilForm fil = new FilForm(res);
+//             fil.show();
                   //  System.out.println(comment.getIdPub()+""+comment.getCommentaire());
                     
                 }

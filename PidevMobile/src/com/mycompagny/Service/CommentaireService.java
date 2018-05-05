@@ -30,4 +30,21 @@ public class CommentaireService {
         NetworkManager.getInstance().addToQueueAndWait(con);
     }
     
+    
+    
+      public void ajoutcomm(int ids,String commentaire) {
+        ConnectionRequest con = new ConnectionRequest();
+        String Url = "http://localhost/webservice/web/app_dev.php/Service/Publication/CommentAdd/"+ids+"/"+commentaire;
+        con.setUrl(Url);
+
+        System.out.println("comment done");
+
+        con.addResponseListener((e) -> {
+            String str = new String(con.getResponseData());
+            System.out.println(str);
+
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+    }
+    
 }
