@@ -68,6 +68,7 @@ public class MatchingGUI extends Form {
         ToTF.setHint("Age Starting From");
         hi.addComponent(ToTF);
         Button BT = new Button("Search");
+        BT.setUIID("AjouterButton");
         BT.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent evt) {

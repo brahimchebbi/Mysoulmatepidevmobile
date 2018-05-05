@@ -51,6 +51,7 @@ public class QuizGUI {
         hi.setUIID("AjoutForm");
        
         Tabs t = new Tabs();
+        t.setUIID("AjouterButton");
         Style s = UIManager.getInstance().getComponentStyle("Tab");
         FontImage icon1 = FontImage.createMaterial(FontImage.MATERIAL_QUESTION_ANSWER, s);
 
@@ -98,7 +99,7 @@ public class QuizGUI {
             CS.addComponent(RB2);
             CS.addComponent(RB3);
             ContainerQuestVieCouple.add(CS);
-            ContainerQuestVieCouple.setUIID("ContainerTabs");
+            ContainerQuestVieCouple.setUIID("AjoutForm");
 
         }
 
@@ -140,7 +141,7 @@ public class QuizGUI {
             CS.addComponent(RB2);
             CS.addComponent(RB3);
             ContainerQuestPhysique.add(CS);
-            ContainerQuestPhysique.setUIID("ContainerTabs");
+            ContainerQuestPhysique.setUIID("AjoutForm");
 
         }
 
@@ -182,7 +183,7 @@ public class QuizGUI {
             CS.addComponent(RB2);
             CS.addComponent(RB3);
             ContainerQuestPersonalite.add(CS);
-            ContainerQuestPersonalite.setUIID("ContainerTabs");
+            ContainerQuestPersonalite.setUIID("AjoutForm");
 
         }
 
@@ -224,7 +225,7 @@ public class QuizGUI {
             CS.addComponent(RB2);
             CS.addComponent(RB3);
             ContainerQuestSociale.add(CS);
-            ContainerQuestSociale.setUIID("ContainerTabs");
+            ContainerQuestSociale.setUIID("AjoutForm");
 
         }
 
@@ -234,11 +235,12 @@ public class QuizGUI {
         t.addTab("Personalite", ContainerQuestPersonalite);
 
         Container c = new Container(new FlowLayout(Component.CENTER));
-        c.setUIID("ContainerTabs");
+        c.setUIID("AjoutForm");
 
         c.setScrollableY(true);
         c.add(t);
         Button B = new Button("VALIDER");
+        B.setUIID("AjouterButton");
         
         B.addActionListener(new ActionListener() {
             @Override

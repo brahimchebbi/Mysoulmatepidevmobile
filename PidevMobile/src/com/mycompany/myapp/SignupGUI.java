@@ -65,6 +65,7 @@ public class SignupGUI extends Form {
         ConfirmMDP.setHint("confirmer votre mdp");
         ConfirmMDP.setConstraint(TextField.PASSWORD);
         Button BT = new Button("S'inscrire");
+        BT.setUIID("AjouterButton");
 
         BT.addActionListener(new ActionListener() {
             @Override

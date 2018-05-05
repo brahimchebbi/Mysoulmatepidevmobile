@@ -682,7 +682,7 @@
         <val key="SliderFull.sel#padUnit" value="2,2,2,2" />
         <val key="SliderFull.sel#padding" value="0,0,4,4" />
         <val key="SliderFull.transparency" value="0" />
-        <val key="Tab.bgColor" value="5bc8fb" />
+        <val key="Tab.bgColor" value="ffcccc" />
         <border key="Tab.border" type="line" thickness="1" color="16777215" />
         <val key="Tab.fgColor" value="ffffff" />
         <font key="Tab.font" type="ttf" face="0" style="0" size="0" name="native:MainRegular" family="native:MainRegular" sizeSettings="3" actualSize="3.0" />

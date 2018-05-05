@@ -11,6 +11,7 @@ import com.codename1.io.JSONParser;
 import com.codename1.io.NetworkManager;
 import com.codename1.ui.Button;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.TextField;
@@ -28,7 +29,7 @@ import java.util.Map;
  *
  * @author CorpseRoot
  */
-public class LoginGUI  extends Form  {
+public class LoginGUI extends Form {
 
     public static Client connectedUser;
 
@@ -40,9 +41,15 @@ public class LoginGUI  extends Form  {
         Container topBar = new Container();
         topBar.setUIID("SideCommand");
         tb.addComponentToSideMenu(topBar);
-        tb.addMaterialCommandToSideMenu("Register", FontImage.MATERIAL_ADD_BOX, e -> { SignupGUI S = new SignupGUI(); S.SignupInterfaceShow(); });
-        tb.addMaterialCommandToSideMenu("Login", FontImage.MATERIAL_WEB, e -> { LoginGUI L = new LoginGUI(); L.LoginInterfaceShow(); });
-        
+        tb.addMaterialCommandToSideMenu("Register", FontImage.MATERIAL_ADD_BOX, e -> {
+            SignupGUI S = new SignupGUI();
+            S.SignupInterfaceShow();
+        });
+        tb.addMaterialCommandToSideMenu("Login", FontImage.MATERIAL_WEB, e -> {
+            LoginGUI L = new LoginGUI();
+            L.LoginInterfaceShow();
+        });
+
         Container welcome = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         TextField EmailTF = new TextField();
         EmailTF.setHint("Email");
@@ -64,49 +71,57 @@ public class LoginGUI  extends Form  {
                 String Url = "http://localhost/symfonypidev/web/app_dev.php/API/user/login?email=" + mail + "&pass=" + pswd;
                 con.setUrl(Url);
                 con.addResponseListener((e) -> {
-                    JSONParser jsonp = new JSONParser();
-                    try {
-                        Map<String, Object> obj = jsonp.parseJSON(new CharArrayReader(new String(con.getResponseData()).toCharArray()));
-                        Client Q = new Client();
-                        float id = Float.parseFloat(obj.get("id").toString());
-                        float age = Float.parseFloat(obj.get("Age").toString());
-                        float vc = Float.parseFloat(obj.get("VieCouplePercent").toString());
-                        float ph = Float.parseFloat(obj.get("PhysiquePercent").toString());
-                        float pe = Float.parseFloat(obj.get("PersonalitePercent").toString());
-                        float so = Float.parseFloat(obj.get("SocialePercent").toString());
+                    String str = new String(con.getResponseData());
+                    System.out.println(str);
+                    char quotes = '"';
+                    String strVar = quotes + "Failed" + quotes;
+                    if (str.equals(strVar)) {
+                        Dialog.show("Error", "Mot de passe incorrect", "OK", "Cancel");
+                        System.out.println("true");
+                    } else {
+                        JSONParser jsonp = new JSONParser();
+                        try {
+                            Map<String, Object> obj = jsonp.parseJSON(new CharArrayReader(new String(con.getResponseData()).toCharArray()));
+                            Client Q = new Client();
+                            float id = Float.parseFloat(obj.get("id").toString());
+                            float age = Float.parseFloat(obj.get("Age").toString());
+                            float vc = Float.parseFloat(obj.get("VieCouplePercent").toString());
+                            float ph = Float.parseFloat(obj.get("PhysiquePercent").toString());
+                            float pe = Float.parseFloat(obj.get("PersonalitePercent").toString());
+                            float so = Float.parseFloat(obj.get("SocialePercent").toString());
 
-                        Q.setID((int) id);
-                        Q.setNom(obj.get("username").toString());
-                        Q.setAge((int) age);
-                        Q.setSexe(obj.get("type").toString());
-                        Q.setVerifié(obj.get("enabled").toString());
-                        Q.setEtat(0);
-                        Q.setAdresse("Unknown");
-                        Q.setIP("0");
-                        Q.setMDP(obj.get("password").toString());
-                        Q.setMail(obj.get("email").toString());
-                        Q.setTelephone(obj.get("phone").toString());
-                        Q.setPhoto(obj.get("imageName").toString());
-                        Q.setPourcentagePerso((int) pe);
-                        Q.setPourcentagePhy((int) ph);
-                        Q.setPourcentageSoc((int) so);
-                        Q.setPourcentageVieC((int) vc);
+                            Q.setID((int) id);
+                            Q.setNom(obj.get("username").toString());
+                            Q.setAge((int) age);
+                            Q.setSexe(obj.get("type").toString());
+                            Q.setVerifié(obj.get("enabled").toString());
+                            Q.setEtat(0);
+                            Q.setAdresse("Unknown");
+                            Q.setIP("0");
+                            Q.setMDP(obj.get("password").toString());
+                            Q.setMail(obj.get("email").toString());
+                            Q.setTelephone(obj.get("phone").toString());
+                            Q.setPhoto(obj.get("imageName").toString());
+                            Q.setPourcentagePerso((int) pe);
+                            Q.setPourcentagePhy((int) ph);
+                            Q.setPourcentageSoc((int) so);
+                            Q.setPourcentageVieC((int) vc);
 
-                        connectedUser = Q;
-                        if (connectedUser.getVerifié().equals("true")) {
-                            Resources theme = UIManager.initFirstTheme("/theme");
-//                            FilForm Fil = new FilForm(theme);
-//                            Fil.show();
-                              ProfileGUI p = new ProfileGUI();
-                              p.ShowProfil();
-                        } else if (connectedUser.getVerifié().equals("false")) {
-                            QuizGUI QGUI = new QuizGUI();
-                            QGUI.AfficherQuiz();
+                            connectedUser = Q;
+                            if (connectedUser.getVerifié().equals("true")) {
+                                Resources theme = UIManager.initFirstTheme("/theme");
+                                FilForm Fil = new FilForm(theme);
+                                Fil.show();
+
+                            } else if (connectedUser.getVerifié().equals("false")) {
+                                QuizGUI QGUI = new QuizGUI();
+                                QGUI.AfficherQuiz();
+
+                            }
+
+                        } catch (IOException ex) {
 
                         }
-
-                    } catch (IOException ex) {
-
                     }
 
                 });
