@@ -109,7 +109,7 @@ public class RdvForm extends Form{
           
             Container C4 = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Commentaire c = new Commentaire(); 
-          Button Listreserve = new Button("Liste Des Reservation");
+          Button Listreserve = new Button("ListeRes");
             Listreserve.setUIID("delete");
             Listreserve.addActionListener(new ActionListener() {
                  @Override
@@ -119,6 +119,14 @@ public class RdvForm extends Form{
                           
              ReservationForm fil = new ReservationForm(res);
              fil.show();
+                 }
+             });
+            Button showadresse = new Button("AfficherAdd");
+            showadresse.setUIID("delete");
+            showadresse.addActionListener(new ActionListener() {
+                 @Override
+                 public void actionPerformed(ActionEvent evt) {
+                    new mapsaff(t.getLongitude(),t.getAltitude()).getF().show();
                  }
              });
        Button reserve = new Button("Reservez");
@@ -204,6 +212,7 @@ public class RdvForm extends Form{
           Container btn1 = new Container(new BoxLayout(BoxLayout.X_AXIS));
           btn1.add(reserve);
           btn1.add(Listreserve);
+          btn1.add(showadresse);
             root2.add(btn);
             root3.add(btn1);
             root.add(root2);

@@ -60,7 +60,8 @@ public class RdvService {
                         E.setIdrdv((int) id);
 
                          E.setNomrdv(obj.get("nomrdv").toString()); 
-                       
+                        E.setAltitude(obj.get("altitude").toString());
+                        E.setLongitude(obj.get("longitude").toString());
                          E.setAdresse(obj.get("adresse").toString()); 
                          E.setImage_name(obj.get("nomImage").toString()); 
                          E.setNbrplacedispo((int)nbrplacedis);
