@@ -19,6 +19,7 @@ import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
+import com.mycompagny.Service.MailerService;
 
 /**
  *
@@ -109,6 +110,9 @@ public class SignupGUI extends Form {
 
                         });
                         NetworkManager.getInstance().addToQueueAndWait(con);
+                        MailerService M = new MailerService();
+                        M.SendMailViaWebService(MailTF.getText());
+                        Dialog.show("Welcome", "Bienvenu dans notre application!", "OK", "Cancel");
                         LoginGUI l = new LoginGUI();
                         l.LoginInterfaceShow();
                     }

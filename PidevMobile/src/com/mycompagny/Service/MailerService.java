@@ -5,6 +5,8 @@
  */
 package com.mycompagny.Service;
 
+import com.codename1.io.ConnectionRequest;
+import com.codename1.io.NetworkManager;
 import com.codename1.messaging.Message;
 import com.codename1.ui.Display;
 
@@ -14,9 +16,21 @@ import com.codename1.ui.Display;
  */
 public class MailerService {
 
-    public void SendMail(String Destination, String Message) {
-        Message m = new Message(Message);
-        Display.getInstance().sendMessage(new String[]{Destination}, "Subject of message", m);
+    public void SendMailViaAPI(String Destination) {
+        Message m = new Message("Thank you for registering.. You can start dating right away after answering the quiz!! Good luck!");
+        Display.getInstance().sendMessage(new String[]{Destination}, "My Soulmate Staff", m);
+    }
+    
+    public void SendMailViaWebService(String Destination)
+    {
+        ConnectionRequest con = new ConnectionRequest();
+        String Url = "http://localhost/symfonypidev/web/app_dev.php/API/mail/send&to=" + Destination;
+        con.setUrl(Url);
+        con.addResponseListener((e) -> {
+            String str = new String(con.getResponseData());
+ 
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
     }
 
 }
