@@ -81,7 +81,7 @@ public class mapsaff {
                         "",
                         "",
                         e3->{   
-                                ToastBar.showMessage("", FontImage.MATERIAL_PLACE);
+                                ToastBar.showMessage("ariana", FontImage.MATERIAL_PLACE);
                                 
                         }
                         
