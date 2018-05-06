@@ -37,10 +37,12 @@ public class MyApplication {
         }
 //       AjouterPublicationForm Ajout = new AjouterPublicationForm(theme);
 //       Ajout.show();
-        LoginGUI l = new LoginGUI();
-          l.LoginInterfaceShow();
+//        LoginGUI l = new LoginGUI();
+//          l.LoginInterfaceShow();
 //         SignupGUI S = new SignupGUI();
 //         S.SignupInterfaceShow();
+           QuizGUI Q = new QuizGUI();
+           Q.AfficherQuiz();
        
     }
 

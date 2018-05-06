@@ -51,7 +51,7 @@ public class QuizGUI {
         hi.setUIID("AjoutForm");
        
         Tabs t = new Tabs();
-        t.setUIID("AjouterButton");
+        //t.setUIID("AjouterButton");
         Style s = UIManager.getInstance().getComponentStyle("Tab");
         FontImage icon1 = FontImage.createMaterial(FontImage.MATERIAL_QUESTION_ANSWER, s);
 
@@ -67,9 +67,6 @@ public class QuizGUI {
             CheckBox RB1 = new CheckBox(Q.getReponse1());
             CheckBox RB2 = new CheckBox(Q.getReponse2());
             CheckBox RB3 = new CheckBox(Q.getReponse3());
-            RB1.setUIID("checkbox1");
-            RB2.setUIID("checkbox1");
-            RB3.setUIID("checkbox1");
             RB1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
@@ -110,9 +107,6 @@ public class QuizGUI {
             CheckBox RB1 = new CheckBox(Q.getReponse1());
             CheckBox RB2 = new CheckBox(Q.getReponse2());
             CheckBox RB3 = new CheckBox(Q.getReponse3());
-            RB1.setUIID("checkbox1");
-            RB2.setUIID("checkbox1");
-            RB3.setUIID("checkbox1");
             RB1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
@@ -152,9 +146,6 @@ public class QuizGUI {
             CheckBox RB1 = new CheckBox(Q.getReponse1());
             CheckBox RB2 = new CheckBox(Q.getReponse2());
             CheckBox RB3 = new CheckBox(Q.getReponse3());
-            RB1.setUIID("checkbox1");
-            RB2.setUIID("checkbox1");
-            RB3.setUIID("checkbox1");
             RB1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
@@ -194,9 +185,6 @@ public class QuizGUI {
             CheckBox RB1 = new CheckBox(Q.getReponse1());
             CheckBox RB2 = new CheckBox(Q.getReponse2());
             CheckBox RB3 = new CheckBox(Q.getReponse3()); 
-            RB1.setUIID("checkbox1");
-            RB2.setUIID("checkbox1");
-            RB3.setUIID("checkbox1");
             RB1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent evt) {
