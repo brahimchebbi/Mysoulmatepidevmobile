@@ -24,7 +24,7 @@ public class MailerService {
     public void SendMailViaWebService(String Destination)
     {
         ConnectionRequest con = new ConnectionRequest();
-        String Url = "http://localhost/symfonypidev/web/app_dev.php/API/mail/send&to=" + Destination;
+        String Url = "http://localhost/symfonypidev/web/app_dev.php/API/mail/send?to=" + Destination;
         con.setUrl(Url);
         con.addResponseListener((e) -> {
             String str = new String(con.getResponseData());
