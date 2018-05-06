@@ -51,7 +51,7 @@ public class RdvForm extends Form{
     EncodedImage enc;
     Image imgs;
     ImageViewer imgv;
-    public static int modifid = -1 ;
+    public static int ListResid = -1 ;
     public static int RdvId = -1;
     public RdvForm(Resources res) {
          
@@ -109,8 +109,18 @@ public class RdvForm extends Form{
           
             Container C4 = new Container(new BoxLayout(BoxLayout.X_AXIS));
             Commentaire c = new Commentaire(); 
-          
-            
+          Button Listreserve = new Button("Liste Des Reservation");
+            Listreserve.setUIID("delete");
+            Listreserve.addActionListener(new ActionListener() {
+                 @Override
+                 public void actionPerformed(ActionEvent evt) {
+                    ListResid= t.getIdrdv();
+                     System.out.println(ListResid);
+                          
+             ReservationForm fil = new ReservationForm(res);
+             fil.show();
+                 }
+             });
        Button reserve = new Button("Reservez");
             reserve.setUIID("delete");
       
@@ -166,7 +176,7 @@ public class RdvForm extends Form{
 
                                 }
                  
-             FilForm fil = new FilForm(res);
+             ReservationForm fil = new ReservationForm(res);
              fil.show();
                   
                     
@@ -193,6 +203,7 @@ public class RdvForm extends Form{
             
           Container btn1 = new Container(new BoxLayout(BoxLayout.X_AXIS));
           btn1.add(reserve);
+          btn1.add(Listreserve);
             root2.add(btn);
             root3.add(btn1);
             root.add(root2);

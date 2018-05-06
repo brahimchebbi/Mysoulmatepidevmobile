@@ -110,21 +110,12 @@ public class RdvService {
                     List<Map<String, Object>> list = (List<Map<String, Object>>) taches.get("root");
                     for (Map<String, Object> obj : list) {
                         reservation Com = new reservation();
-                        float id = Float.parseFloat(obj.get("id").toString());
+                        float id = Float.parseFloat(obj.get("idreservation").toString());
                         
                         
                                               
                         Com.setIdreservation((int) id);
                        // Com.setCommentaire(obj.get("commentaire").toString());
-                        
-                        
-                        
-                        
-                        
-                       
-                   
-                        
-                        
                         
                        
                         listTach.add(Com);
