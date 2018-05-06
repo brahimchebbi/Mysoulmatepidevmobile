@@ -73,7 +73,7 @@ public class ModifierPublicationForm extends Form{
                         System.out.println("------------"+news);
                      
       FileUploader fu = new FileUploader("http://localhost/images/products/");
-        
+        //up
         //Upload
         fileNameInServer = fu.upload(news);
                         System.out.println("-----------"+fileNameInServer+"---------------");
