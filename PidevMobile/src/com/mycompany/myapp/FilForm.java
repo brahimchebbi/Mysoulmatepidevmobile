@@ -168,8 +168,17 @@ public class FilForm extends Form {
              Container root4 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
           
             Container C4 = new Container(new BoxLayout(BoxLayout.X_AXIS));
-            Commentaire c = new Commentaire(); 
-            Label Commlab = new Label("ff");
+   Button AffComment = new Button("Afficher Liste Des Commentaire");
+            AffComment.setUIID("delete");
+            AffComment.addActionListener(new ActionListener() {
+                 @Override
+                 public void actionPerformed(ActionEvent evt) {
+                      CommPubId= t.getId_pub();
+              System.out.println(CommPubId);
+              ListCommentaireForm li = new ListCommentaireForm(res);
+              li.show();
+                 }
+             });
             
        Button Comment = new Button("Commentez");
             Comment.setUIID("delete");
@@ -211,16 +220,8 @@ public class FilForm extends Form {
                                     );
 
                                 }
-//                    CommPubId= t.getId_pub();
-//                     CommentaireService ser = new CommentaireService();
-//            Commentaire comment = new Commentaire();
-//            comment.setIdPub(CommPubId);
-//            comment.setCommentaire(Comm.getText());
-//                               System.out.println(CommPubId);
-//
-//            ser.ajoutComm(comment);
-             FilForm fil = new FilForm(res);
-             fil.show();
+             ListCommentaireForm ListComm = new ListCommentaireForm(res);
+             ListComm.show();
                   //  System.out.println(comment.getIdPub()+""+comment.getCommentaire());
                     
                 }
@@ -232,13 +233,13 @@ public class FilForm extends Form {
             C1.add(l);
             C2.add(label1);
             C3.add(Comm);
-           C4.add(Commlab);
+          
           
             root2.add(C1);
             root2.add(C2);
             root3.add(C3);
             root3.add(C4);
-          
+         
             
             Container btn = new Container(new BoxLayout(BoxLayout.X_AXIS));
 
@@ -247,13 +248,16 @@ public class FilForm extends Form {
             btn.add(Modif);
           Container btn1 = new Container(new BoxLayout(BoxLayout.X_AXIS));
           btn1.add(Comment);
+           btn1.add(AffComment);
             root2.add(btn);
             root3.add(btn1);
             root.add(root2);
             root.add(root3);
-           
+          
 
-        }
+        
+                            
+         }
          home.add(root);
             add(home);
         

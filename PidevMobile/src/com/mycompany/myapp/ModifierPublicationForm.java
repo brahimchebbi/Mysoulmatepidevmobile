@@ -99,7 +99,7 @@ public class ModifierPublicationForm extends Form{
         Publication PUB = new Publication();
         Container row1 = new Container(new GridLayout(1));
         TextField text = new TextField();
-        text.setHint(PUB.getText());
+        text.setHint("Exprimze-vous");
          text.setUIID("AjoutFormField");
         row1.addComponent(text);
         center.addComponent(row1);
@@ -108,21 +108,21 @@ public class ModifierPublicationForm extends Form{
         TextField adresse = new TextField();
         
         center.addComponent(adresse);
-        adresse.setHint(PUB.getAdresse());
+        adresse.setHint("Adresse");
          adresse.setUIID("AjoutFormField");
         TextField altitude = new TextField();
         
         center.addComponent(altitude);
         altitude.setHint(" Altitude");
                  altitude.setUIID("AjoutFormField");
-
+altitude.setHidden(true);
       TextField longitude = new TextField();
         
         center.addComponent(longitude);
         longitude.setHint(" Longitude");
                          longitude.setUIID("AjoutFormField");
 
-       
+       longitude.setHidden(true);
         
         this.addComponent(BorderLayout.CENTER, center);
         
