@@ -112,12 +112,15 @@ public class RdvService {
                     for (Map<String, Object> obj : list) {
                         reservation Com = new reservation();
                         float id = Float.parseFloat(obj.get("idreservation").toString());
-                        
+                         float nbplace = Float.parseFloat(obj.get("nbrplacereserver").toString());
                         
                                               
                         Com.setIdreservation((int) id);
-                       // Com.setCommentaire(obj.get("commentaire").toString());
-                        
+                         Com.setNbrplacereserver((int) nbplace);
+                              Map<String, Object> da = (Map<String, Object>) obj.get("datedebut");
+                        double t = (double) da.get("timestamp");
+                        long x = (long) (t* 1000L);
+                        Com.setDatedebut(new Date(x));                 
                        
                         listTach.add(Com);
 
