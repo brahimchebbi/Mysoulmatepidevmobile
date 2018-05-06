@@ -69,7 +69,6 @@ public class ReservationForm extends Form{
                                 
                                 
                                 );
-                                                                                    
                                 Titre.setUIID("CommTitre");
                                 String datestring = "Date : "+pr.getDatedebut();
             Label Commlab = new Label(datestring);
