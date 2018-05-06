@@ -131,6 +131,7 @@ altitude.setHidden(true);
                          longitude.setUIID("AjoutFormField");
 
        longitude.setHidden(true);
+       
         
         this.addComponent(BorderLayout.CENTER, center);
 //        
