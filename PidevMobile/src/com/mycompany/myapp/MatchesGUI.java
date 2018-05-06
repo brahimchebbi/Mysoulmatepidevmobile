@@ -55,7 +55,8 @@ public class MatchesGUI  extends Form  {
     EncodedImage enc;
     Image imgs;
     ImageViewer imgv;
-
+    public static Client UserToShow;
+    
     public void ShowMatches() {
         Form f = new Form("Start talking now!!", new BoxLayout(BoxLayout.Y_AXIS));
         f.setUIID("AjoutForm");
@@ -106,8 +107,22 @@ public class MatchesGUI  extends Form  {
             C1.add(label);
             C1.add(l);
             C1.add(label1);
+            Button BT = new Button("Voir Plus");
+            BT.setUIID("AjouterButton");
+            BT.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    UserToShow = t;
+                    DateProfile D = new DateProfile();
+                    D.ShowDateInfo();
+                }
+            });
+            Container s = new Container(new BoxLayout(BoxLayout.Y_AXIS));
+            s.add(C1);
+            s.add(BT);
             //C1.setLeadComponent(l);
-            root2.add(C1);
+            root2.add(s);
+          //  root2.add(BT);
 
             Container btn = new Container(new BoxLayout(BoxLayout.X_AXIS));
             root2.add(btn);
