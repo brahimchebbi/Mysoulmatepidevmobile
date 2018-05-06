@@ -4,12 +4,13 @@
  * and open the template in the editor.
  */
 package com.mycompany.myapp;
+
 import com.codename1.capture.Capture;
 import com.codename1.components.FloatingActionButton;
 import com.codename1.components.InteractionDialog;
 import com.codename1.components.ToastBar;
 import com.codename1.maps.Coord;
- import com.codename1.ui.Button;
+import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
@@ -39,96 +40,90 @@ import rest.file.uploader.tn.FileUploader;
  * @author shannah
  */
 public class AjouterPublicationForm extends Form {
+
     final Resources res;
-    String imgPath; 
+    String imgPath;
     String fileNameInServer;
-     private static final String HTML_API_KEY = "AIzaSyDUiPfabJtrpjjj1Ix1vBsl1fKG_kzmeMw";
+    private static final String HTML_API_KEY = "AIzaSyDUiPfabJtrpjjj1Ix1vBsl1fKG_kzmeMw";
+
     public AjouterPublicationForm(Resources res) {
         super("Ajouter Publication");
-         Toolbar tb = getToolbar();
+        Toolbar tb = getToolbar();
         tb.setUIID("toolbar");
-        FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);     
-        fab.addActionListener(e -> {          
+        FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);
+        fab.addActionListener(e -> {
 //            AddPublicite add= new AddPublicite(theme);
 //            add.getForm().show();
-             // new AddPublicite(theme).show();
+            // new AddPublicite(theme).show();
         });
         this.setUIID("AjoutForm");
         this.res = res;
         setLayout(new BorderLayout());
         Container north = new Container(new FlowLayout(Component.CENTER));
-        
-         
-        
+
         Button photoButton = new Button("Ajouter Button");
-       photoButton.setUIID("AjouterButton");
+        photoButton.setUIID("AjouterButton");
         north.addComponent(photoButton);
         photoButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent evt) {
-                    try {
-                        imgPath = Capture.capturePhoto();
-                       // img = Image.createImage(imgPath);    
-                      // iv.setImage(img);
-                       // file = new FileUploader(imgPath);
-                        System.out.println(imgPath);
-                        String link = imgPath.toString();
-                        int pod= link.indexOf("/", 2);
-                        String news = link.substring(pod+2, link.length());
-                        System.out.println("------------"+news);
-                     
-      FileUploader fu = new FileUploader("http://localhost/images/products/");
-        
-        //Upload
-        fileNameInServer = fu.upload(news);
-                        System.out.println("-----------"+fileNameInServer+"---------------");
-                        System.out.println("photo ajouter");
-                                
-        
-       
-                     
-                    
-                    } catch (Exception ex) {
-                        System.out.println("merci");
-                  
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                try {
+                    imgPath = Capture.capturePhoto();
+                    // img = Image.createImage(imgPath);    
+                    // iv.setImage(img);
+                    // file = new FileUploader(imgPath);
+                    System.out.println(imgPath);
+                    String link = imgPath.toString();
+                    int pod = link.indexOf("/", 2);
+                    String news = link.substring(pod + 2, link.length());
+                    System.out.println("------------" + news);
+
+                    FileUploader fu = new FileUploader("http://localhost/images/products/");
+
+                    //Upload
+                    fileNameInServer = fu.upload(news);
+                    System.out.println("-----------" + fileNameInServer + "---------------");
+                    System.out.println("photo ajouter");
+
+                } catch (Exception ex) {
+                    System.out.println("merci");
+
                 }
 
-          
-                
             }
-            });
+        });
         this.addComponent(BorderLayout.NORTH, north);
-        
+
         Container center = new Container(new BoxLayout(BoxLayout.Y_AXIS));
-         center.setUIID("AjoutFormCenter");
-        
+        center.setUIID("AjoutFormCenter");
+
         Container row1 = new Container(new GridLayout(1));
         TextField text = new TextField();
         text.setHint("Exprimez-vous");
-         text.setUIID("AjoutFormField");
+        text.setUIID("AjoutFormField");
         row1.addComponent(text);
         center.addComponent(row1);
         center.setScrollableY(true);
-        
+
         TextField adresse = new TextField();
-        
+
         center.addComponent(adresse);
         adresse.setHint(" Addresse");
-         adresse.setUIID("AjoutFormField");
+        adresse.setUIID("AjoutFormField");
         TextField altitude = new TextField();
-        
+
         center.addComponent(altitude);
         altitude.setHint(" Altitude");
-                 altitude.setUIID("AjoutFormField");
-altitude.setHidden(true);
-      TextField longitude = new TextField();
-        
+        altitude.setUIID("AjoutFormField");
+        altitude.setHidden(true);
+        TextField longitude = new TextField();
+
         center.addComponent(longitude);
         longitude.setHint(" Longitude");
-                         longitude.setUIID("AjoutFormField");
+        longitude.setUIID("AjoutFormField");
 
-       longitude.setHidden(true);
-        
+        longitude.setHidden(true);
+
         this.addComponent(BorderLayout.CENTER, center);
 //        
 //         Container hi = new Container(new BoxLayout(BoxLayout.Y_AXIS));
@@ -207,44 +202,83 @@ altitude.setHidden(true);
 //        );
 //        this.addComponent(BorderLayout.CENTER, hi);
         Button AjouterB = new Button("Ajouter Publication");
-AjouterB.setUIID("AjouterButton");
+        AjouterB.setUIID("AjouterButton");
         AjouterB.setTextPosition(Component.LEFT);
-        
+
         this.addComponent(BorderLayout.SOUTH, AjouterB);
-         AjouterB.addActionListener((e) -> {
+        AjouterB.addActionListener((e) -> {
             PublicationService ser = new PublicationService();
             Publication t = new Publication();
             t.setAdresse(adresse.getText());
             t.setText(text.getText());
             t.setImage(fileNameInServer);
             ser.ajoutPub(t);
-           
-             FilForm fil = new FilForm(res);
-             fil.show();
-            
-            System.out.println(text.getText() + " " + adresse.getText()+""+fileNameInServer);
+
+            FilForm fil = new FilForm(res);
+            fil.show();
+
+            System.out.println(text.getText() + " " + adresse.getText() + "" + fileNameInServer);
         });
         this.addCommand(new Command("Fil Actualite") {
 
             @Override
             public void actionPerformed(ActionEvent evt) {
-                 FilForm Fil = new FilForm(res);
+                FilForm Fil = new FilForm(res);
                 Fil.show();
             }
-            
+
         });
-        
+
+        this.setBackCommand(new Command("Matching") {
+
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                MatchingGUI M = new MatchingGUI();
+                M.AfficherMatchingMenu();
+            }
+
+        });
+
+        this.setBackCommand(new Command("Mon Profile") {
+
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                ProfileGUI P = new ProfileGUI();
+                P.ShowProfil();
+            }
+
+        });
+
         this.setBackCommand(new Command("Ajouter Publication") {
 
             @Override
             public void actionPerformed(ActionEvent evt) {
-                 AjouterPublicationForm Ajout =new AjouterPublicationForm(res);
+                AjouterPublicationForm Ajout = new AjouterPublicationForm(res);
                 Ajout.show();
-                
+
             }
-            
+
         });
-          
-        
+
+        this.setBackCommand(new Command("Rendez-vous Liste") {
+
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                RdvForm RDV = new RdvForm(res);
+                RDV.show();
+            }
+
+        });
+
+        this.setBackCommand(new Command("Deconnexion") {
+
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                LoginGUI L = new LoginGUI();
+                L.LoginInterfaceShow();
+            }
+
+        });
+
     }
 }

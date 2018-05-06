@@ -150,7 +150,7 @@ ModifB.setUIID("AjouterButton");
 
         }
         );
-        this.addCommand(new Command("Fil Actualite") {
+         this.addCommand(new Command("Fil Actualite") {
 
             @Override
             public void actionPerformed(ActionEvent evt) {
@@ -158,6 +158,26 @@ ModifB.setUIID("AjouterButton");
                 Fil.show();
             }
             
+        });
+        
+          this.setBackCommand(new Command("Matching") {
+
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+               MatchingGUI  M = new MatchingGUI();
+               M.AfficherMatchingMenu();
+            }
+            
+        });
+          
+          this.setBackCommand(new Command("Mon Profile") {
+
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                ProfileGUI P = new ProfileGUI();
+                P.ShowProfil();
+            }
+
         });
         
         this.setBackCommand(new Command("Ajouter Publication") {
@@ -170,6 +190,28 @@ ModifB.setUIID("AjouterButton");
             }
             
         });
+          
+        this.setBackCommand(new Command("Rendez-vous Liste") {
+
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                RdvForm RDV =new RdvForm(res);
+                RDV.show();
+            }
+            
+        });
+        
+        
+        this.setBackCommand(new Command("Deconnexion") {
+
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                LoginGUI L = new LoginGUI();
+                L.LoginInterfaceShow();
+            }
+            
+        });
+        
           
         
     }

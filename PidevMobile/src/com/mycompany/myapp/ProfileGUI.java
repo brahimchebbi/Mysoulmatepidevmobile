@@ -11,6 +11,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.Container;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
+import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
@@ -20,6 +21,8 @@ import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.plaf.UIManager;
+import com.codename1.ui.util.Resources;
 import static com.mycompany.myapp.QuizGUI.ScorePH;
 import static com.mycompany.myapp.QuizGUI.ScorePe;
 import static com.mycompany.myapp.QuizGUI.ScoreSO;
@@ -37,6 +40,33 @@ public class ProfileGUI {
         Toolbar tb = new Toolbar();
         tb = F.getToolbar();
         tb.setUIID("toolbar");
+        
+        Container topBar = new Container();
+       // topBar.add(BorderLayout.SOUTH, new Label("Cool App Tagline...", "SidemenuTagline"));
+        topBar.setUIID("SideCommand");
+        tb.addComponentToSideMenu(topBar);
+
+       
+        tb.addMaterialCommandToSideMenu("Fil Actualite", FontImage.MATERIAL_HOME, e -> { Resources theme = UIManager.initFirstTheme("/theme");  FilForm Fil = new FilForm(theme);
+                Fil.show();
+        });
+        tb.addMaterialCommandToSideMenu("Matching", FontImage.MATERIAL_WEB, e -> {  MatchingGUI  M = new MatchingGUI();
+               M.AfficherMatchingMenu();
+        });
+        
+         tb.addMaterialCommandToSideMenu("Mon Profil", FontImage.MATERIAL_ACCOUNT_BOX, e -> { ProfileGUI P = new ProfileGUI(); P.ShowProfil();
+        });
+        
+        tb.addMaterialCommandToSideMenu("Ajouter Publication", FontImage.MATERIAL_ADD, e -> { Resources res = UIManager.initFirstTheme("/theme");   AjouterPublicationForm Ajout =new AjouterPublicationForm(res);
+                Ajout.show();
+        });
+        tb.addMaterialCommandToSideMenu("Rendez-vous Liste", FontImage.MATERIAL_INFO, e -> {   Resources res = UIManager.initFirstTheme("/theme"); RdvForm RDV =new RdvForm(res);
+                RDV.show();
+        });
+        tb.addMaterialCommandToSideMenu("Deconnexion", FontImage.MATERIAL_INFO, e -> { LoginGUI L = new LoginGUI();
+                L.LoginInterfaceShow();
+        });
+        
         Container C1 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
         Label label = new Label();
         int deviceWidth = Display.getInstance().getDisplayWidth() / 2;

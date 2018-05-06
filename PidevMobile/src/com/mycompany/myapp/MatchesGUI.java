@@ -40,6 +40,7 @@ import com.codename1.ui.layouts.FlowLayout;
 import com.codename1.ui.layouts.GridLayout;
 import com.codename1.ui.layouts.LayeredLayout;
 import com.codename1.ui.plaf.Style;
+import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.mycompany.Entite.Client;
 import java.util.ArrayList;
@@ -66,13 +67,24 @@ public class MatchesGUI  extends Form  {
         topBar.setUIID("SideCommand");
         tb.addComponentToSideMenu(topBar);
 
-        tb.addMaterialCommandToSideMenu("Home", FontImage.MATERIAL_HOME, e -> {
+        tb.addMaterialCommandToSideMenu("Fil Actualite", FontImage.MATERIAL_HOME, e -> { Resources theme = UIManager.initFirstTheme("/theme");  FilForm Fil = new FilForm(theme);
+                Fil.show();
         });
-        tb.addMaterialCommandToSideMenu("Website", FontImage.MATERIAL_WEB, e -> { 
+        tb.addMaterialCommandToSideMenu("Matching", FontImage.MATERIAL_WEB, e -> {  MatchingGUI  M = new MatchingGUI();
+               M.AfficherMatchingMenu();
         });
-        tb.addMaterialCommandToSideMenu("Settings", FontImage.MATERIAL_SETTINGS, e -> {
+        
+         tb.addMaterialCommandToSideMenu("Mon Profil", FontImage.MATERIAL_ACCOUNT_BOX, e -> { ProfileGUI P = new ProfileGUI(); P.ShowProfil();
         });
-        tb.addMaterialCommandToSideMenu("About", FontImage.MATERIAL_INFO, e -> {
+        
+        tb.addMaterialCommandToSideMenu("Ajouter Publication", FontImage.MATERIAL_ADD, e -> { Resources res = UIManager.initFirstTheme("/theme");   AjouterPublicationForm Ajout =new AjouterPublicationForm(res);
+                Ajout.show();
+        });
+        tb.addMaterialCommandToSideMenu("Rendez-vous Liste", FontImage.MATERIAL_INFO, e -> {   Resources res = UIManager.initFirstTheme("/theme"); RdvForm RDV =new RdvForm(res);
+                RDV.show();
+        });
+        tb.addMaterialCommandToSideMenu("Deconnexion", FontImage.MATERIAL_INFO, e -> { LoginGUI L = new LoginGUI();
+                L.LoginInterfaceShow();
         });
         
         Container root = new Container(new BoxLayout(BoxLayout.Y_AXIS));
