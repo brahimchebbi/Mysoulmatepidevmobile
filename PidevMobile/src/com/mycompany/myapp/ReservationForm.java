@@ -71,9 +71,11 @@ public class ReservationForm extends Form{
                                 );
                                                                                     
                                 Titre.setUIID("CommTitre");
-                                String datestring = ""+pr.getDatedebut();
+                                String datestring = "Date : "+pr.getDatedebut();
             Label Commlab = new Label(datestring);
-                                
+            Container Cnb = new Container(new BoxLayout(BoxLayout.X_AXIS));
+            String nbplace = "Nombre De Place :  "+pr.getNbrplacereserver();
+                                Label place = new Label(nbplace);
             Button DelBu = new Button("supprimer");
               DelBu.setUIID("delete");
               DelBu.addActionListener(new ActionListener() {
@@ -98,8 +100,10 @@ public class ReservationForm extends Form{
                                  });
             
             CAff.add(Commlab);
+            Cnb.add(place);
              root5.add(Titre);
             root5.add(CAff);
+            root5.add(Cnb);
             Container btn = new Container(new BoxLayout(BoxLayout.X_AXIS));
 
             btn.add(DelBu);
