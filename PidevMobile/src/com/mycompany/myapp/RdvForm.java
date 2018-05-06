@@ -156,7 +156,7 @@ public class RdvForm extends Form{
                               
                                 RdvService pre = new RdvService();
 
-                                if (Dialog.show("Confirmer", "Voulez vous Ajouter ce commentaire ?", "Oui", "Non")) {
+                                if (Dialog.show("Confirmer", "Voulez vous reservez ce rendez-vous ?", "Oui", "Non")) {
                                     int nombre = Integer.parseInt(nbp.getText());
                                     pre.ajoutres(ids,date, nombre);
 
