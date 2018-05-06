@@ -18,18 +18,23 @@ import com.codename1.ui.Container;
 import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
+import com.codename1.ui.Font;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Image;
 import com.codename1.ui.Label;
+import com.codename1.ui.Slider;
 import com.codename1.ui.TextArea;
 import com.codename1.ui.TextField;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.URLImage;
 import com.codename1.ui.events.ActionEvent;
 import com.codename1.ui.events.ActionListener;
+import com.codename1.ui.geom.Dimension;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
+import com.codename1.ui.plaf.Border;
+import com.codename1.ui.plaf.Style;
 import com.codename1.ui.spinner.DateSpinner;
 import com.codename1.ui.util.Resources;
 import com.codename1.util.StringUtil;
@@ -53,6 +58,7 @@ public class RdvForm extends Form{
     ImageViewer imgv;
     public static int ListResid = -1 ;
     public static int RdvId = -1;
+    Slider s ;
     public RdvForm(Resources res) {
          
         super("RDV Liste");
@@ -131,6 +137,7 @@ public class RdvForm extends Form{
              });
        Button reserve = new Button("Reservez");
             reserve.setUIID("delete");
+            
       
            reserve.addActionListener(new ActionListener() {
                 @Override
@@ -190,7 +197,7 @@ public class RdvForm extends Form{
                     
                 }
             });
-       
+       Container C6 = new Container(new BoxLayout(BoxLayout.Y_AXIS));
              
         
             C1.add(label);
@@ -198,12 +205,15 @@ public class RdvForm extends Form{
             C2.add(label1);
             C3.add(nbp);
             C5.add(datedeb);
-           
+            s=createStarRankSlider();
+           C6.add(s);
+       //    s.getProgress()
           
             root2.add(C1);
             root2.add(C2);
             root3.add(C3);
             root3.add(C4);
+            root3.add(C6);
           root3.add(C5);
             
             Container btn = new Container(new BoxLayout(BoxLayout.X_AXIS));
@@ -259,4 +269,31 @@ public class RdvForm extends Form{
         
     
 }
+    private void initStarRankStyle(Style s, Image star) {
+    s.setBackgroundType(Style.BACKGROUND_IMAGE_TILE_BOTH);
+    s.setBorder(Border.createEmpty());
+    s.setBgImage(star);
+    s.setBgTransparency(0);
+}
+
+private Slider createStarRankSlider() {
+    Slider starRank = new Slider();
+    starRank.setEditable(true);
+    starRank.setMinValue(0);
+    starRank.setMaxValue(5);
+    Font fnt = Font.createTrueTypeFont("native:MainLight", "native:MainLight").
+            derive(Display.getInstance().convertToPixels(10, true), Font.STYLE_PLAIN);
+    Style s = new Style(0xffff33, 0, fnt, (byte)0);
+    Image fullStar = FontImage.createMaterial(FontImage.MATERIAL_STAR, s).toImage();
+    s.setOpacity(100);
+    s.setFgColor(0);
+    Image emptyStar = FontImage.createMaterial(FontImage.MATERIAL_STAR, s).toImage();
+    initStarRankStyle(starRank.getSliderEmptySelectedStyle(), emptyStar);
+    initStarRankStyle(starRank.getSliderEmptyUnselectedStyle(), emptyStar);
+    initStarRankStyle(starRank.getSliderFullSelectedStyle(), fullStar);
+    initStarRankStyle(starRank.getSliderFullUnselectedStyle(), fullStar);
+    starRank.setPreferredSize(new Dimension(fullStar.getWidth() * 5, fullStar.getHeight()));
+    return starRank;
+}
+
 }

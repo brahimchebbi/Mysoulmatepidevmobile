@@ -26,6 +26,7 @@ public class rdv {
     private int codepostal;
    private String image_name;
    private int idrdvuser;
+  
 
     public rdv(int idrdv, String nomrdv, int capaciteacceuil, int nbrplacedispo, float prix, String description, String disponibilite, String adresse, String altitude, String longitude, String ville, String etat, int codepostal, String image_name, int idrdvuser) {
         this.idrdv = idrdv;
