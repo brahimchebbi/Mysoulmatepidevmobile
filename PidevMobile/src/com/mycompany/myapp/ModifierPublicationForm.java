@@ -71,9 +71,9 @@ public class ModifierPublicationForm extends Form{
                         int pod= link.indexOf("/", 2);
                         String news = link.substring(pod+2, link.length());
                         System.out.println("------------"+news);
-                     
+                     //oooo
       FileUploader fu = new FileUploader("http://localhost/images/products/");
-        //up
+        //upppp
         //Upload
         fileNameInServer = fu.upload(news);
                         System.out.println("-----------"+fileNameInServer+"---------------");
