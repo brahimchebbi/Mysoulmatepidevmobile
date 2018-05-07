@@ -173,6 +173,10 @@ public class RdvForm extends Form{
                                     int nombre = Integer.parseInt(nbp.getText());
                                     int note = s.getProgress();
                                      System.out.println(note);
+                                     if(nombre==0 || nombre==1){
+                Dialog.show("Reservation","Le Nombre De Place Reservées Doit Etre > 2 !!!!! " ,"ok",null);
+            }
+                                     else{
                                     pre.ajoutres(ids,date, nombre,note);
 
                                     Message m = new Message("Vous avez reservez ce rendez-vous" + t.getNomrdv());
@@ -196,7 +200,7 @@ public class RdvForm extends Form{
                                             System.currentTimeMillis() + 10, // fire date/time
                                             LocalNotification.REPEAT_NONE // Whether to repeat and what frequency
                                     );
-
+                                     }
                                 }
                  
             
