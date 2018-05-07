@@ -162,10 +162,10 @@ public class RdvForm extends Form{
                                 System.out.println("PubId:" + ids);
                               
                                 RdvService pre = new RdvService();
-
+                                int note = s.getProgress();
                                 if (Dialog.show("Confirmer", "Voulez vous reservez ce rendez-vous ?", "Oui", "Non")) {
                                     int nombre = Integer.parseInt(nbp.getText());
-                                    pre.ajoutres(ids,date, nombre);
+                                    pre.ajoutres(ids,date, nombre,note);
 
                                     Message m = new Message("Vous avez reservez ce rendez-vous" + t.getNomrdv());
 
@@ -191,8 +191,7 @@ public class RdvForm extends Form{
 
                                 }
                  
-             ReservationForm fil = new ReservationForm(res);
-             fil.show();
+            
                   
                     
                 }

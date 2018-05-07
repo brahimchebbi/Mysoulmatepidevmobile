@@ -20,6 +20,7 @@ public class reservation {
     
     private Date datefin;
     private int nbrplacereserver;
+     private String note;
    
 private int idguest;    
 
@@ -50,6 +51,25 @@ private int idguest;
         this.datedebut = datedebut;
         this.datefin = datefin;
         this.idguest = idguest;
+    }
+
+    public reservation(int idreservationrdv, Date datedebut, Date datefin, int nbrplacereserver, String note, int idguest) {
+        this.idreservationrdv = idreservationrdv;
+        this.datedebut = datedebut;
+        this.datefin = datefin;
+        this.nbrplacereserver = nbrplacereserver;
+        this.note = note;
+        this.idguest = idguest;
+    }
+
+    
+    
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
    
