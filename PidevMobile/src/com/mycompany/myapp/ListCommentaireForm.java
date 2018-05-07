@@ -6,13 +6,18 @@
 package com.mycompany.myapp;
 
 import com.codename1.components.FloatingActionButton;
+import com.codename1.io.ConnectionRequest;
+import com.codename1.io.NetworkManager;
+import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.FontImage;
 import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.Toolbar;
 import com.codename1.ui.events.ActionEvent;
+import com.codename1.ui.events.ActionListener;
 import com.codename1.ui.layouts.BoxLayout;
 import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
@@ -71,8 +76,32 @@ public class ListCommentaireForm extends Form{
                                 Titre.setUIID("CommTitre");
             Label Commlab = new Label(pr.getCommentaire());
             
+             Button del = new Button("Supprimer");
+            del.setUIID("delete");
+            
+            del.addActionListener(new ActionListener() {
+                                     @Override
+                                     public void actionPerformed(ActionEvent evt) {
+                                             Dialog d = new Dialog();
+
+                    if (Dialog.show("Confirmation", "Supprimer ce commentaire ??", "oui", "Annuler")) {
+                        ConnectionRequest req = new ConnectionRequest();
+
+                        req.setUrl("http://localhost/symfonypidev/web/app_dev.php/API/Publication/DeleteComm/"
+                                + pr.getId());
+                        System.out.println(pr.getId());
+                        NetworkManager.getInstance().addToQueue(req);
+                        home.revalidate();
+//                       PubliciteController pc = new PubliciteController(theme);
+//                        pc.getForm().show();
+                        new FilForm(res).show();
+
+                    }
+                                     }
+                                 });
             
             CAff.add(Commlab);
+            CAff.add(del);
              root5.add(Titre);
             root5.add(CAff);
            

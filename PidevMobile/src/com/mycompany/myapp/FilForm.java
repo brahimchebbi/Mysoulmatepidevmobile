@@ -125,7 +125,7 @@ public class FilForm extends Form {
 
                     Dialog d = new Dialog();
 
-                    if (Dialog.show("Confirmation", "delete this product??", "oui", "Annuler")) {
+                    if (Dialog.show("Confirmation", "Supprimer cette Publication??", "oui", "Annuler")) {
                         ConnectionRequest req = new ConnectionRequest();
 
                         req.setUrl("http://localhost/symfonypidev/web/app_dev.php/API/Publication/DeletePub/"
