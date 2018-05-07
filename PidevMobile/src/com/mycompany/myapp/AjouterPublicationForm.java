@@ -133,7 +133,7 @@ public class AjouterPublicationForm extends Form {
 
         this.addComponent(BorderLayout.SOUTH, AjouterB);
         AjouterB.addActionListener((e) -> {
-            if(text.getText().equals("")||text.getText().equals(" ")||adresse.getText().equals("")||adresse.getText().equals(" ")){
+            if(text.getText().equals("")||text.getText().equals(" ")||text.getText().equals("  ")||text.getText().equals("   ")||adresse.getText().equals("")||adresse.getText().equals(" ")){
                 Dialog.show("Ajout Publication","Les Champs sont Vide !!!!! " ,"ok",null);
             }
             else{
