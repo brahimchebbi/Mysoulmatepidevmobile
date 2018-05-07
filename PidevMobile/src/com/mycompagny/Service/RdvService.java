@@ -79,12 +79,12 @@ public class RdvService {
         NetworkManager.getInstance().addToQueueAndWait(con);
         return listrdv;
     }
-         public void ajoutres(int ids,Date dat,int nbplace ) {
+         public void ajoutres(int ids,Date dat,int nbplace, int note ) {
         ConnectionRequest con = new ConnectionRequest();
-        String Url = "http://localhost/symfonypidev/web/app_dev.php/API/Publication/AjoutRES/"+ids+"/"+dat+"/"+nbplace;
+        String Url = "http://localhost/symfonypidev/web/app_dev.php/API/Publication/AjoutRES/"+ids+"/"+dat+"/"+nbplace+"/"+note;
         con.setUrl(Url);
 
-        System.out.println("comment done");
+        System.out.println("reservation done");
 
         con.addResponseListener((e) -> {
             String str = new String(con.getResponseData());

@@ -20,6 +20,7 @@ public class reservation {
     
     private Date datefin;
     private int nbrplacereserver;
+    private int note;
    
 private int idguest;    
 
@@ -31,6 +32,23 @@ private int idguest;
         this.idreservationrdv = idreservationrdv;
         this.datedebut = datedebut;
         this.datefin = datefin;
+        this.idguest = idguest;
+    }
+
+    public reservation(int idreservation, int idreservationrdv, Date datedebut, int nbrplacereserver, int note) {
+        this.idreservation = idreservation;
+        this.idreservationrdv = idreservationrdv;
+        this.datedebut = datedebut;
+        this.nbrplacereserver = nbrplacereserver;
+        this.note = note;
+    }
+
+    public reservation(int idreservationrdv, Date datedebut, Date datefin, int nbrplacereserver, int note, int idguest) {
+        this.idreservationrdv = idreservationrdv;
+        this.datedebut = datedebut;
+        this.datefin = datefin;
+        this.nbrplacereserver = nbrplacereserver;
+        this.note = note;
         this.idguest = idguest;
     }
 
@@ -50,6 +68,16 @@ private int idguest;
         this.datedebut = datedebut;
         this.datefin = datefin;
         this.idguest = idguest;
+    }
+
+    
+    
+    public int getNote() {
+        return note;
+    }
+
+    public void setNote(int note) {
+        this.note = note;
     }
 
    
