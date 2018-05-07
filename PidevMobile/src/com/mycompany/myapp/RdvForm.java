@@ -58,6 +58,7 @@ public class RdvForm extends Form{
     ImageViewer imgv;
     public static int ListResid = -1 ;
     public static int RdvId = -1;
+    public static int rr=-1;
     Slider s ;
     public RdvForm(Resources res) {
          
@@ -132,7 +133,10 @@ public class RdvForm extends Form{
             showadresse.addActionListener(new ActionListener() {
                  @Override
                  public void actionPerformed(ActionEvent evt) {
-                    new mapsaff(t.getLongitude(),t.getAltitude()).getF().show();
+                     rr=t.getIdrdv();
+                     System.out.println(rr);
+                    new mapsaff(t.getLongitude(),t.getAltitude(),res).getF().show();
+                    
                  }
              });
        Button reserve = new Button("Reservez");
@@ -162,11 +166,13 @@ public class RdvForm extends Form{
                                 System.out.println("PubId:" + ids);
                               
                                 RdvService pre = new RdvService();
-                                int note = s.getProgress();
+                              
                                 
                                 if (Dialog.show("Confirmer", "Voulez vous reservez ce rendez-vous ?", "Oui", "Non")) {
-                                    System.out.println(note);
+                                   
                                     int nombre = Integer.parseInt(nbp.getText());
+                                    int note = s.getProgress();
+                                     System.out.println(note);
                                     pre.ajoutres(ids,date, nombre,note);
 
                                     Message m = new Message("Vous avez reservez ce rendez-vous" + t.getNomrdv());

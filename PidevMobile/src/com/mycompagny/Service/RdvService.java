@@ -134,6 +134,42 @@ public class RdvService {
         return listTach;
     }
       
-         
-         
+          public ArrayList<rdv> getListRDVId(int ids) {
+        ArrayList<rdv> listTach = new ArrayList<>();
+        ConnectionRequest con = new ConnectionRequest();
+        con.setUrl("http://localhost/symfonypidev/web/app_dev.php/API/Publication/RdvIdShow/"+ids);
+        con.addResponseListener(new ActionListener<NetworkEvent>() {
+            @Override
+            public void actionPerformed(NetworkEvent evt) {
+                JSONParser jsonp = new JSONParser();
+                
+                try {
+                    Map<String, Object> taches = jsonp.parseJSON(new CharArrayReader(new String(con.getResponseData()).toCharArray()));
+                    System.out.println(taches);
+                    
+                    List<Map<String, Object>> lis = (List<Map<String, Object>>) taches.get("root");
+                    for (Map<String, Object> obj : lis) {
+                        rdv Com = new rdv();
+                        float id = Float.parseFloat(obj.get("id").toString());
+                        
+                        
+                                              
+                        Com.setIdrdv((int) id);
+                        
+
+                        listTach.add(Com);
+
+                    }
+                } catch (IOException ex) {
+                }
+
+            }
+        });
+        NetworkManager.getInstance().addToQueueAndWait(con);
+        return listTach;
+    }
+      
 }
+
+         
+

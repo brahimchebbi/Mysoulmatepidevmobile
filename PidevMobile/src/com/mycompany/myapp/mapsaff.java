@@ -22,6 +22,7 @@ import com.codename1.ui.Form;
 import com.codename1.ui.Label;
 import com.codename1.ui.SideMenuBar;
 import com.codename1.ui.TextField;
+import com.codename1.ui.Toolbar;
 import com.codename1.ui.geom.Rectangle;
 import com.codename1.ui.layouts.BorderLayout;
 import com.codename1.ui.layouts.BoxLayout;
@@ -32,7 +33,9 @@ import com.codename1.ui.plaf.UIManager;
 import com.codename1.ui.util.Resources;
 import com.mycompagny.Service.RdvService;
 import com.mycompany.Entite.rdv;
+import com.mycompany.Entite.reservation;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -48,7 +51,7 @@ public class mapsaff {
 
     
    
-        public mapsaff(String longi , String lalti)
+        public mapsaff(String longi , String lalti,Resources res)
         {     final MapContainer cnt = new MapContainer(HTML_API_KEY);
 
         final boolean[] init = {false};
@@ -57,6 +60,10 @@ public class mapsaff {
         s.setFgColor(0xff0000);
         s.setBgTransparency(0);
         
+        Toolbar tb = hi.getToolbar();
+                    tb.addMaterialCommandToRightBar("Retour", FontImage.MATERIAL_ARROW_BACK, e1 -> {
+                      new RdvForm(res).showBack();
+                    });
 
         FontImage image = FontImage.createMaterial(FontImage.MATERIAL_PLACE, s, Display.getInstance().convertToPixels(1));
         Coord coord = new Coord(Double.parseDouble(lalti), Double.parseDouble(longi));
@@ -81,8 +88,10 @@ public class mapsaff {
                         "",
                         "",
                         e3->{   
+              
+                                 
                                 ToastBar.showMessage("", FontImage.MATERIAL_PLACE);
-                                
+                             
                         }
                         
                         
@@ -107,4 +116,6 @@ public class mapsaff {
     public void setF(Form f) {
         this.hi = f;
     }
+    
+    
 }

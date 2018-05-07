@@ -14,6 +14,7 @@ import com.codename1.ui.Button;
 import com.codename1.ui.Command;
 import com.codename1.ui.Component;
 import com.codename1.ui.Container;
+import com.codename1.ui.Dialog;
 import com.codename1.ui.Display;
 import com.codename1.ui.EncodedImage;
 import com.codename1.ui.FontImage;
@@ -132,6 +133,10 @@ public class AjouterPublicationForm extends Form {
 
         this.addComponent(BorderLayout.SOUTH, AjouterB);
         AjouterB.addActionListener((e) -> {
+            if(text.getText().equals("")||text.getText().equals(" ")||adresse.getText().equals("")||adresse.getText().equals(" ")){
+                Dialog.show("Ajout Publication","Les Champs sont Vide !!!!! " ,"ok",null);
+            }
+            else{
             PublicationService ser = new PublicationService();
             Publication t = new Publication();
             t.setAdresse(adresse.getText());
@@ -143,6 +148,7 @@ public class AjouterPublicationForm extends Form {
             fil.show();
 
             System.out.println(text.getText() + " " + adresse.getText() + "" + fileNameInServer);
+            }
         });
         this.addCommand(new Command("Fil Actualite") {
 
