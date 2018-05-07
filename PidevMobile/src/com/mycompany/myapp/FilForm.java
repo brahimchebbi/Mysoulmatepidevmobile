@@ -106,7 +106,7 @@ public class FilForm extends Form {
 
                 @Override
                 public void actionPerformed(ActionEvent evt) {
-                    String accessToken = "EAACEdEose0cBAO0atOpWDZCZC0dcMQUzss2nHDSRcA6idrrU1FMGHRwAcaFOZBhGSiloXSxt1jnzwZAqU9ogK2z2saQ286RoPRfHI90xQIw8c1IPmaHogaQORllQsssCsxjmCpAAQV6REFAuu1SVxDahFxC6S8uyqkJeXrgCoJbEE3PWdHTpsko2NWFblQHYWk4kiqZCrXcpZCRn2aH4eZC";
+                    String accessToken = "EAACEdEose0cBAD2YAiHetKvmBkdUGNqgwrJ7gLoaXV6P64PWq0GQzDgvJfDAgMr7B9PAKLh70dzBNNrXngyaAt8QeZC6uhOsUn6XeCDRoPMRZAWWj3Pese5CDY2nckZBOiymPeo9Hw7fObnj0W37nKkJ9b4vCTVP8YxYZB6qZA7b3WmCozlW6ng1nW2LkWAkuBdvjzRJMdgZDZD";
 
                     FacebookClient fbClient = new DefaultFacebookClient(accessToken);
                     FacebookType response = fbClient.publish("me/feed", FacebookType.class,
