@@ -83,7 +83,7 @@ public class ReservationForm extends Form{
                                      public void actionPerformed(ActionEvent evt) {
                                            Dialog d = new Dialog();
 
-                    if (Dialog.show("Confirmation", "delete this product??", "oui", "Annuler")) {
+                    if (Dialog.show("Confirmation", "Supprimez Cette Reservation??", "oui", "Annuler")) {
                         ConnectionRequest req = new ConnectionRequest();
 
                         req.setUrl("http://localhost/webservice/web/app_dev.php/Service/Publication/DeletRES/"
