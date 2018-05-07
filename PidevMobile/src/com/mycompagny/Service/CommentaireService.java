@@ -40,9 +40,9 @@ public class CommentaireService {
     
     
     
-      public void ajoutcomm(int ids,String commentaire) {
+      public void ajoutcomm(int id, int ids,String commentaire) {
         ConnectionRequest con = new ConnectionRequest();
-        String Url = "http://localhost/symfonypidev/web/app_dev.php/API/Publication/CommentAdd/"+ids+"/"+commentaire;
+        String Url = "http://localhost/symfonypidev/web/app_dev.php/API/Publication/CommentAdd/"+id+"/"+ids+"/"+commentaire;
         con.setUrl(Url);
 
         System.out.println("comment done");

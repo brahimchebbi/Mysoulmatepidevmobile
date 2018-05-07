@@ -34,7 +34,6 @@ public class ListCommentaireForm extends Form{
         Toolbar tb = getToolbar();
         tb.setUIID("toolbar");
         
-        tb.addCommandToRightBar("Back", null, (ev)->{ });
          tb.addCommandToRightBar("Back", null, (ev)->{ Resources theme = UIManager.initFirstTheme("/theme"); FilForm F = new FilForm(theme); F.show(); });
         
         FloatingActionButton fab = FloatingActionButton.createFAB(FontImage.MATERIAL_ADD);     

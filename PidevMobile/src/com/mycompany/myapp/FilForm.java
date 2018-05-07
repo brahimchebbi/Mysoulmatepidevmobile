@@ -192,7 +192,7 @@ public class FilForm extends Form {
                     CommentaireService pre = new CommentaireService();
 
                     if (Dialog.show("Confirmer", "Voulez vous Ajouter ce commentaire ?", "Oui", "Non")) {
-                        pre.ajoutcomm(ids, Comm.getText());
+                        pre.ajoutcomm(LoginGUI.connectedUser.getID(),ids, Comm.getText());
 
                         Message m = new Message("Vous avez ajouter un nouveau commentaire pour la publication" + t.getText());
 
