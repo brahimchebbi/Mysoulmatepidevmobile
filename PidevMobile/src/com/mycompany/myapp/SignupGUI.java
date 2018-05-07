@@ -28,7 +28,7 @@ import com.mycompagny.Service.MailerService;
 public class SignupGUI extends Form {
 
     public void SignupInterfaceShow() {
-        Form F = new Form("Sign up", new BoxLayout(BoxLayout.Y_AXIS));
+        Form F = new Form("Register", new BoxLayout(BoxLayout.Y_AXIS));
         F.setUIID("AjoutForm");
         Toolbar tb = new Toolbar();
         tb = F.getToolbar();
